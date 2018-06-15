@@ -5,15 +5,15 @@
     <description>Wno Jekyll is a port of my Ghost theme wno.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 15 Jun 2018 13:41:30 +0800</pubDate>
-    <lastBuildDate>Fri, 15 Jun 2018 13:41:30 +0800</lastBuildDate>
+    <pubDate>Fri, 15 Jun 2018 14:18:33 +0800</pubDate>
+    <lastBuildDate>Fri, 15 Jun 2018 14:18:33 +0800</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Hello World - Wno</title>
         <description>&lt;h4 id=&quot;whats-this&quot;&gt;What’s this&lt;/h4&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/webbleen/wno-jekyll&quot;&gt;Wno Jekyll&lt;/a&gt; is a theme for &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;. It is a port of my Ghost theme &lt;a href=&quot;https://github.com/webbleen/wno&quot;&gt;wno&lt;/a&gt;, which is originally developed from &lt;a href=&quot;https://github.com/daleanthony/uno&quot;&gt;Dale Anthony’s Uno&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/webbleen/wno-jekyll&quot;&gt;Wno Jekyll&lt;/a&gt; is a theme for &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;. It is a port of my Ghost theme &lt;a href=&quot;https://github.com/webbleen/wno&quot;&gt;wno&lt;/a&gt;, which is originally developed from &lt;a href=&quot;https://github.com/onevcat/vno-jekyll&quot;&gt;OneV-s-Den’s Vno&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h4 id=&quot;usage&quot;&gt;Usage&lt;/h4&gt;
 
@@ -50,15 +50,11 @@
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;OneV’s Den&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onvcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;webbleen&lt;/td&gt;
       &lt;td&gt;&lt;a href=&quot;http://webbleen.com&quot;&gt;http://webbleen.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;July Tang&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://webbleen.com&quot;&gt;http://blog.julytang.xyz&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Harry Lee&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://qiuqi.li&quot;&gt;http://qiuqi.li&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -69,7 +65,7 @@
 
 &lt;h4 id=&quot;license&quot;&gt;License&lt;/h4&gt;
 
-&lt;p&gt;Great thanks to &lt;a href=&quot;https://github.com/daleanthony&quot;&gt;Dale Anthony&lt;/a&gt; and his &lt;a href=&quot;https://github.com/daleanthony/uno&quot;&gt;Uno&lt;/a&gt;. Wno Jekyll is based on Uno, and contains a lot of modification on page layout, animation, font and some more things I can not remember. Wno Jekyll is followed with Uno and be licensed as &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot;&gt;Creative Commons Attribution 4.0 International&lt;/a&gt;. See the link for more information.&lt;/p&gt;
+&lt;p&gt;Great thanks to &lt;a href=&quot;https://github.com/onevcat&quot;&gt;OneV-s-Den&lt;/a&gt; and his &lt;a href=&quot;https://github.com/onevcat/vno-jekyll&quot;&gt;Vno&lt;/a&gt;. Wno Jekyll is based on Vno, and contains a lot of modification on page layout, animation, font and some more things I can not remember. Wno Jekyll is followed with Vno and be licensed as &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot;&gt;Creative Commons Attribution 4.0 International&lt;/a&gt;. See the link for more information.&lt;/p&gt;
 </description>
         <pubDate>Tue, 16 Feb 2016 14:32:24 +0800</pubDate>
         <link>http://localhost:4000/2016/02/hello-world-wno/</link>
