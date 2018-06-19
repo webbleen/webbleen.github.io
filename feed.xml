@@ -5,9 +5,266 @@
     <description>Wno Jekyll is a port of my Ghost theme wno.</description>
     <link>http://webbleen.com/</link>
     <atom:link href="http://webbleen.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 19 Jun 2018 13:03:33 +0800</pubDate>
-    <lastBuildDate>Tue, 19 Jun 2018 13:03:33 +0800</lastBuildDate>
+    <pubDate>Tue, 19 Jun 2018 17:57:55 +0800</pubDate>
+    <lastBuildDate>Tue, 19 Jun 2018 17:57:55 +0800</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>centos6.x 部署redmine-3.3.3+nginx</title>
+        <description>&lt;p&gt;&lt;strong&gt;安装前提条件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;centOs 6.x，详见：&lt;a href=&quot;http://www.redmine.org/projects/redmine/wiki/RedmineInstall&quot;&gt;http://www.redmine.org/projects/redmine/wiki/RedmineInstall&lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Redmine version&lt;/th&gt;
+      &lt;th&gt;Supported Ruby versions&lt;/th&gt;
+      &lt;th&gt;Rails version used&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4.0 (upcoming)&lt;/td&gt;
+      &lt;td&gt;ruby 2.2(2.2.2 and later), 2.3, 2.4&lt;/td&gt;
+      &lt;td&gt;Rails 5.1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.4&lt;/td&gt;
+      &lt;td&gt;ruby 1.9.3, 2.0.0, 2.1, 2.2, 2.3, 2.4&lt;/td&gt;
+      &lt;td&gt;Rails 4.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.3&lt;/td&gt;
+      &lt;td&gt;ruby 1.9.3, 2.0.0, 2.1, 2.2, 2.3&lt;/td&gt;
+      &lt;td&gt;Rails 4.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;ruby 1.9.3, 2.0.0, 2.1, 2.2&lt;/td&gt;
+      &lt;td&gt;Rails 4.2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;需要的基础库&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;yum -y install libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;从redmine官网下载 redmine：&lt;a href=&quot;http://www.redmine.org/releases/redmine-3.3.3.tar.gz&quot;&gt;http://www.redmine.org/releases/redmine-3.3.3.tar.gz&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;解压后安装&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;./configure &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;配置gem镜像源&lt;a href=&quot;http://gems.ruby-china.org/&quot;&gt;http://gems.ruby-china.org/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem sources -l
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;https://gems.ruby-china.org #确保只有 gems.ruby-china.org&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安装Passenger（用于整合Nginx）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem install passenger
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;passenger-install-nginx-module
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;按照提示步骤一步步操作&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安装框架rails&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem install rails -v&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4.2.7.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;安装redmine的依赖库&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;安装bundler 工具 参考第2条修改bundler镜像源&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem install bundler
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;解压redmine后在redmine-3.3.3/下面执行&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;修改配置文件并初始化数据库和数据&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;创建数据库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;CREATE DATABASE IF NOT EXISTS redmine DEFAULT CHARSET utf8;
+CREATE DATABASE IF NOT EXISTS redmine_development DEFAULT CHARSET utf8;
+CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;配置文件为config/database.yml&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Default setup is given for MySQL with ruby1.9.
+# Examples for PostgreSQL, SQLite3 and SQL Server can be found at the end.
+# Line indentation must be 2 spaces (no tabs).
+&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mysql2&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redmine&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;localhost&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;****&quot;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf8&lt;/span&gt;
+
+&lt;span class=&quot;py&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mysql2&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redmine_development&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;localhost&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;****&quot;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf8&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Warning: The database defined as &quot;test&quot; will be erased and
+# re-generated from your development database when you run &quot;rake&quot;.
+# Do not set this db to the same as development or production.
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mysql2&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redmine_test&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;localhost&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;****&quot;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;为Rails生成cookies秘钥&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;rake generate_secret_token
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;创建数据库结构&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RAILS_ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;production rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;生成缺省数据&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RAILS_ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;production &lt;span class=&quot;nv&quot;&gt;REDMINE_LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;zh rake redmine:load_default_data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;配置nginx.conf&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;err&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;err&quot;&gt;3000;&lt;/span&gt;
+            &lt;span class=&quot;err&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;py&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3000;&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# server_name  somename  alias  another.alias;
+&lt;/span&gt;    
+            &lt;span class=&quot;err&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;err&quot;&gt;root&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;/var/www/html/redmine/public;&lt;/span&gt;
+            &lt;span class=&quot;err&quot;&gt;passenger_enabled&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;on;&lt;/span&gt;
+            &lt;span class=&quot;err&quot;&gt;index&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;index.html&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;index.htm;&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;安装期间可能碰到库或者软件版本不兼容的问题，需要逐个排查。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;其他&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;页面优化&lt;/p&gt;
+
+    &lt;p&gt;优化点：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;页面字体大小&lt;/li&gt;
+  &lt;li&gt;邮件内容字体大小&lt;/li&gt;
+  &lt;li&gt;右边栏目宽度&lt;/li&gt;
+  &lt;li&gt;列表行高调整&lt;/li&gt;
+  &lt;li&gt;主题宽度限制，超出部分显示‘…’，鼠标放上显示完整内容&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018/redmine-issue-list.png&quot; alt=&quot;redmine-issue-list&quot; /&gt;
+(截图仅供参考)&lt;/p&gt;
+
+&lt;p&gt;邮件字体大小调整&lt;/p&gt;
+
+&lt;p&gt;修改：&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 邮件字体大小调整
+# 文件：app\views\layouts\mailer.html.erb
+# 第6行
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.8em; &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 改为：
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;14px;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 其它
+&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/stylesheets/application.css
+# 第2行
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 修改为
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;微软雅黑,Verdana, sans-serif; font-size: 13px; color:#484848; margin: 0; padding: 0; min-width: 900px; }&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 第73行
+#sidebar{ float: right; width: 22%; position: relative; z-index: 9; padding: 0; margin: 0;}
+# 修改为
+#sidebar{ float: right; width: 12%; position: relative; z-index: 9; padding: 0; margin: 0;}
+&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 第127行
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center; vertical-align:top; padding-right:10px;}&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 改成
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center; vertical-align:middle; padding-right:10px;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 第131行
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.checkbox&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;15px; padding: 2px 0 0 0; }&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 修改为
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.checkbox&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;15px; padding: 2px 0 0 0;height: 30px; }&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 第155行
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.category,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.assigned_to,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.string,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.text,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.relations,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.parent&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;white-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;normal; }&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 修改为
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/**************change***************/&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.category,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.assigned_to,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.string,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.text,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.relations,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.parent&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;white-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nowrap;text-align: justify;word-break:break-all; }&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject{&lt;/span&gt;
+ &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;260px;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;a{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;block;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hidden;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;300px;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ellipsis;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;left;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;/**************end&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;change***************/&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/javascripts/ application.js
+# 在651行后追加
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$(function(){&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;$('tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;a').each(function(i){&lt;/span&gt;
+	      &lt;span class=&quot;err&quot;&gt;$(this).attr('title',$(this).html());&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 19 Jun 2018 08:28:00 +0800</pubDate>
+        <link>http://webbleen.com/2018/06/centos6.x-install-redmine-3.1.1+nginx/</link>
+        <guid isPermaLink="true">http://webbleen.com/2018/06/centos6.x-install-redmine-3.1.1+nginx/</guid>
+        
+        <category>操作文档集</category>
+        
+        
+      </item>
     
       <item>
         <title>Hello World - Wno</title>

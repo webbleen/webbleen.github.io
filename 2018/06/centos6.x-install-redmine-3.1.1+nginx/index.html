@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>centos6.x 部署redmine-3.3.3+nginx</title>
+  <meta name="description" content="安装前提条件">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="centos6.x 部署redmine-3.3.3+nginx">
+  <meta name="twitter:description" content="安装前提条件">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="centos6.x 部署redmine-3.3.3+nginx">
+  <meta property="og:description" content="安装前提条件">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.ico" />
+  <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/ico">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://webbleen.com/2018/06/centos6.x-install-redmine-3.1.1+nginx/">
+  <link rel="alternate" type="application/rss+xml" title="webbleen" href="http://webbleen.com/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 webbleen 的主页" class="blog-button"><img src="/assets/images/avatar.png" width="80" alt="webbleen logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for webbleen" class="blog-button">webbleen</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">A blog-orientation theme for Jekyll</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">Wno Jekyll is a port of my Ghost theme wno.</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description"><a href="https://github.com/webbleen/wno-jekyll" target="_blank">Download the theme</a></p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="Visit blog" class="blog-button">Blog</a></li>
+                
+                  <li class="navigation__item"><a href="http://project.webbleen.com" target="_blank" title="My Projects">Projects</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/togopaul" title="@togopaul 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/webbleen" title="@webbleen 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:webbleen@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-red"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-06-19 16:28:00 +1600" itemprop="datePublished" class="post-meta__date date">2018-06-19</time> &#8226; <span class="post-meta__tags tags">操作文档集</span>
+    </div>
+    <h1 class="post-title">centos6.x 部署redmine-3.3.3+nginx</h1>
+  </header>
+
+  <section class="post">
+    <p><strong>安装前提条件</strong></p>
+
+<p>centOs 6.x，详见：<a href="http://www.redmine.org/projects/redmine/wiki/RedmineInstall">http://www.redmine.org/projects/redmine/wiki/RedmineInstall</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Redmine version</th>
+      <th>Supported Ruby versions</th>
+      <th>Rails version used</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>4.0 (upcoming)</td>
+      <td>ruby 2.2(2.2.2 and later), 2.3, 2.4</td>
+      <td>Rails 5.1</td>
+    </tr>
+    <tr>
+      <td>3.4</td>
+      <td>ruby 1.9.3, 2.0.0, 2.1, 2.2, 2.3, 2.4</td>
+      <td>Rails 4.2</td>
+    </tr>
+    <tr>
+      <td>3.3</td>
+      <td>ruby 1.9.3, 2.0.0, 2.1, 2.2, 2.3</td>
+      <td>Rails 4.2</td>
+    </tr>
+    <tr>
+      <td>3.2</td>
+      <td>ruby 1.9.3, 2.0.0, 2.1, 2.2</td>
+      <td>Rails 4.2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>需要的基础库</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>yum -y install libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
+</code></pre>
+</div>
+
+<p><strong>从redmine官网下载 redmine：<a href="http://www.redmine.org/releases/redmine-3.3.3.tar.gz">http://www.redmine.org/releases/redmine-3.3.3.tar.gz</a></strong></p>
+
+<p>解压后安装</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>./configure <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
+</code></pre>
+</div>
+
+<p><strong>配置gem镜像源<a href="http://gems.ruby-china.org/">http://gems.ruby-china.org/</a></strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+</code></pre>
+</div>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem sources -l
+</code></pre>
+</div>
+<p>https://gems.ruby-china.org #确保只有 gems.ruby-china.org</p>
+
+<p><strong>安装Passenger（用于整合Nginx）</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install passenger
+</code></pre>
+</div>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>passenger-install-nginx-module
+</code></pre>
+</div>
+<p>按照提示步骤一步步操作</p>
+
+<p><strong>安装框架rails</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install rails -v<span class="o">=</span>4.2.7.1
+</code></pre>
+</div>
+
+<p><strong>安装redmine的依赖库</strong></p>
+
+<p>安装bundler 工具 参考第2条修改bundler镜像源</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+</code></pre>
+</div>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install bundler
+</code></pre>
+</div>
+<p>解压redmine后在redmine-3.3.3/下面执行</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>bundle install
+</code></pre>
+</div>
+
+<p><strong>修改配置文件并初始化数据库和数据</strong></p>
+
+<p>创建数据库</p>
+
+<pre><code class="language-mysql">CREATE DATABASE IF NOT EXISTS redmine DEFAULT CHARSET utf8;
+CREATE DATABASE IF NOT EXISTS redmine_development DEFAULT CHARSET utf8;
+CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
+</code></pre>
+
+<p>配置文件为config/database.yml</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># Default setup is given for MySQL with ruby1.9.
+# Examples for PostgreSQL, SQLite3 and SQL Server can be found at the end.
+# Line indentation must be 2 spaces (no tabs).
+</span>
+<span class="py">production</span><span class="p">:</span>
+  <span class="py">adapter</span><span class="p">:</span> <span class="s">mysql2</span>
+  <span class="py">database</span><span class="p">:</span> <span class="s">redmine</span>
+  <span class="py">host</span><span class="p">:</span> <span class="s">localhost</span>
+  <span class="py">username</span><span class="p">:</span> <span class="s">root</span>
+  <span class="py">password</span><span class="p">:</span> <span class="s">"****"</span>
+  <span class="py">encoding</span><span class="p">:</span> <span class="s">utf8</span>
+
+<span class="py">development</span><span class="p">:</span>
+  <span class="py">adapter</span><span class="p">:</span> <span class="s">mysql2</span>
+  <span class="py">database</span><span class="p">:</span> <span class="s">redmine_development</span>
+  <span class="py">host</span><span class="p">:</span> <span class="s">localhost</span>
+  <span class="py">username</span><span class="p">:</span> <span class="s">root</span>
+  <span class="py">password</span><span class="p">:</span> <span class="s">"****"</span>
+  <span class="py">encoding</span><span class="p">:</span> <span class="s">utf8</span>
+
+<span class="c"># Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+</span><span class="py">test</span><span class="p">:</span>
+  <span class="py">adapter</span><span class="p">:</span> <span class="s">mysql2</span>
+  <span class="py">database</span><span class="p">:</span> <span class="s">redmine_test</span>
+  <span class="py">host</span><span class="p">:</span> <span class="s">localhost</span>
+  <span class="py">username</span><span class="p">:</span> <span class="s">root</span>
+  <span class="py">password</span><span class="p">:</span> <span class="s">"****"</span>
+  <span class="py">encoding</span><span class="p">:</span> <span class="s">utf8</span>
+</code></pre>
+</div>
+
+<p>为Rails生成cookies秘钥</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rake generate_secret_token
+</code></pre>
+</div>
+<p>创建数据库结构</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">RAILS_ENV</span><span class="o">=</span>production rake db:migrate
+</code></pre>
+</div>
+<p>生成缺省数据</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">RAILS_ENV</span><span class="o">=</span>production <span class="nv">REDMINE_LANG</span><span class="o">=</span>zh rake redmine:load_default_data
+</code></pre>
+</div>
+
+<p><strong>配置nginx.conf</strong></p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="err">server</span> <span class="err">{</span>
+            <span class="err">listen</span>       <span class="err">3000;</span>
+            <span class="err">listen</span>       <span class="py">localhost</span><span class="p">:</span><span class="s">3000;</span>
+            <span class="c"># server_name  somename  alias  another.alias;
+</span>    
+            <span class="err">location</span> <span class="err">/</span> <span class="err">{</span>
+            <span class="err">root</span>   <span class="err">/var/www/html/redmine/public;</span>
+            <span class="err">passenger_enabled</span> <span class="err">on;</span>
+            <span class="err">index</span>  <span class="err">index.html</span> <span class="err">index.htm;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>安装期间可能碰到库或者软件版本不兼容的问题，需要逐个排查。</p>
+
+<p><strong>其他</strong></p>
+
+<ul>
+  <li>
+    <p>页面优化</p>
+
+    <p>优化点：</p>
+  </li>
+</ul>
+
+<ol>
+  <li>页面字体大小</li>
+  <li>邮件内容字体大小</li>
+  <li>右边栏目宽度</li>
+  <li>列表行高调整</li>
+  <li>主题宽度限制，超出部分显示‘…’，鼠标放上显示完整内容</li>
+</ol>
+
+<p><img src="/assets/images/2018/redmine-issue-list.png" alt="redmine-issue-list" />
+(截图仅供参考)</p>
+
+<p>邮件字体大小调整</p>
+
+<p>修改：</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># 邮件字体大小调整
+# 文件：app\views\layouts\mailer.html.erb
+# 第6行
+</span><span class="err">font-</span><span class="py">size</span><span class="p">:</span> <span class="s">0.8em; </span>
+<span class="c"># 改为：
+</span><span class="err">font-</span><span class="py">size</span><span class="p">:</span> <span class="s">14px;</span>
+<span class="c"># 其它
+</span>
+<span class="c"># 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/stylesheets/application.css
+# 第2行
+</span><span class="err">body</span> <span class="err">{</span> <span class="err">font-</span><span class="py">family</span><span class="p">:</span> <span class="s">Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }</span>
+<span class="c"># 修改为
+</span><span class="err">body</span> <span class="err">{</span> <span class="err">font-</span><span class="py">family</span><span class="p">:</span> <span class="s">微软雅黑,Verdana, sans-serif; font-size: 13px; color:#484848; margin: 0; padding: 0; min-width: 900px; }</span>
+
+<span class="c"># 第73行
+#sidebar{ float: right; width: 22%; position: relative; z-index: 9; padding: 0; margin: 0;}
+# 修改为
+#sidebar{ float: right; width: 12%; position: relative; z-index: 9; padding: 0; margin: 0;}
+</span>
+<span class="c"># 第127行
+</span><span class="err">table.list</span> <span class="err">td</span> <span class="err">{text-</span><span class="py">align</span><span class="p">:</span><span class="s">center; vertical-align:top; padding-right:10px;}</span>
+<span class="c"># 改成
+</span><span class="err">table.list</span> <span class="err">td</span> <span class="err">{text-</span><span class="py">align</span><span class="p">:</span><span class="s">center; vertical-align:middle; padding-right:10px;}</span>
+
+<span class="c"># 第131行
+</span><span class="err">table.list</span> <span class="err">td.checkbox</span> <span class="err">{</span> <span class="py">width</span><span class="p">:</span> <span class="s">15px; padding: 2px 0 0 0; }</span>
+<span class="c"># 修改为
+</span><span class="err">table.list</span> <span class="err">td.checkbox</span> <span class="err">{</span> <span class="py">width</span><span class="p">:</span> <span class="s">15px; padding: 2px 0 0 0;height: 30px; }</span>
+
+<span class="c"># 第155行
+</span><span class="err">tr.issue</span> <span class="err">td.subject,</span> <span class="err">tr.issue</span> <span class="err">td.category,</span> <span class="err">td.assigned_to,</span> <span class="err">tr.issue</span> <span class="err">td.string,</span> <span class="err">tr.issue</span> <span class="err">td.text,</span> <span class="err">tr.issue</span> <span class="err">td.relations,</span> <span class="err">tr.issue</span> <span class="err">td.parent</span> <span class="err">{</span> <span class="err">white-</span><span class="py">space</span><span class="p">:</span> <span class="s">normal; }</span>
+<span class="c"># 修改为
+</span><span class="err">/**************change***************/</span>
+<span class="err">tr.issue</span> <span class="err">td.subject,</span> <span class="err">tr.issue</span> <span class="err">td.category,</span> <span class="err">td.assigned_to,</span> <span class="err">tr.issue</span> <span class="err">td.string,</span> <span class="err">tr.issue</span> <span class="err">td.text,</span> <span class="err">tr.issue</span> <span class="err">td.relations,</span> <span class="err">tr.issue</span> <span class="err">td.parent</span> <span class="err">{</span> <span class="err">white-</span><span class="py">space</span><span class="p">:</span> <span class="s">nowrap;text-align: justify;word-break:break-all; }</span>
+<span class="err">tr.issue</span> <span class="err">td.subject{</span>
+ <span class="py">width</span><span class="p">:</span> <span class="s">260px;</span>
+<span class="err">}</span>
+<span class="err">tr.issue</span> <span class="err">td.subject</span> <span class="err">a{</span>
+  <span class="py">display</span><span class="p">:</span> <span class="s">block;</span>
+  <span class="py">overflow</span><span class="p">:</span><span class="s">hidden;</span>
+  <span class="py">width</span><span class="p">:</span> <span class="s">300px;</span>
+  <span class="err">text-</span><span class="py">overflow</span><span class="p">:</span><span class="s">ellipsis;</span>
+  <span class="err">text-</span><span class="py">align</span><span class="p">:</span> <span class="s">left;</span>
+<span class="err">}</span>
+<span class="err">/**************end</span> <span class="err">change***************/</span>
+
+<span class="c"># 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/javascripts/ application.js
+# 在651行后追加
+</span><span class="err">$(function(){</span>
+	<span class="err">$('tr.issue</span> <span class="err">td.subject</span> <span class="err">a').each(function(i){</span>
+	      <span class="err">$(this).attr('title',$(this).html());</span>
+	<span class="err">});</span>
+<span class="err">});</span>
+</code></pre>
+</div>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">更早的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/2016/02/hello-world-wno/" title="link to Hello World - Wno">Hello World - Wno</a></h2>
+       <p class="excerpt">What’s thisWno Jekyll is a theme for Jekyll. It is a port of my Ghost theme wno, which is originally developed from OneV-s-Den’s Vno.Usage$ git clone https://github.com/webbleen/wno-jekyll.git your_site$ cd your_site$ bundler install$ bundler exec...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2016-02-16 15:32:24 +0900" class="post-list__meta--date date">2016-02-16</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2016/02/hello-world-wno/>继续阅读</a></div>
+   </div>
+   
+</section>
+
+<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://webbleen.com/2018/06/centos6.x-install-redmine-3.1.1+nginx/";
+        this.page.identifier = "/2018/06/centos6.x-install-redmine-3.1.1+nginx/";
+    };
+
+    var disqus_shortname = 'wno-jekyll';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-06-19 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">本站由 <a href="http://webbleen.com">@webbleen</a> 创建，采用 <a href="https://github.com/webbleen/wno-jekyll">Wno - Jekyll</a> 作为主题 - &copy; 2018</span>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+    
+  </body>
+
+</html>
