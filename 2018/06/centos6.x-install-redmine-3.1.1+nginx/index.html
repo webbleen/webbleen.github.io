@@ -142,7 +142,7 @@
   </header>
 
   <section class="post">
-    <p><strong>安装前提条件</strong></p>
+    <h5 id="安装前提条件"><strong>安装前提条件</strong></h5>
 
 <p>centOs 6.x，详见：<a href="http://www.redmine.org/projects/redmine/wiki/RedmineInstall">http://www.redmine.org/projects/redmine/wiki/RedmineInstall</a></p>
 
@@ -178,20 +178,13 @@
   </tbody>
 </table>
 
-<p><strong>需要的基础库</strong></p>
+<h5 id="需要的基础库"><strong>需要的基础库</strong></h5>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>yum -y install libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
 </code></pre>
 </div>
 
-<p><strong>从redmine官网下载 redmine：<a href="http://www.redmine.org/releases/redmine-3.3.3.tar.gz">http://www.redmine.org/releases/redmine-3.3.3.tar.gz</a></strong></p>
-
-<p>解压后安装</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>./configure <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
-</code></pre>
-</div>
-
-<p><strong>配置gem镜像源<a href="http://gems.ruby-china.org/">http://gems.ruby-china.org/</a></strong></p>
+<h5 id="配置gem镜像源"><strong>配置gem镜像源</strong></h5>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 </code></pre>
@@ -201,7 +194,7 @@
 </div>
 <p>https://gems.ruby-china.org #确保只有 gems.ruby-china.org</p>
 
-<p><strong>安装Passenger（用于整合Nginx）</strong></p>
+<h5 id="安装passenger用于整合nginx"><strong>安装Passenger（用于整合Nginx）</strong></h5>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install passenger
 </code></pre>
@@ -211,13 +204,13 @@
 </div>
 <p>按照提示步骤一步步操作</p>
 
-<p><strong>安装框架rails</strong></p>
+<h5 id="安装框架rails"><strong>安装框架rails</strong></h5>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install rails -v<span class="o">=</span>4.2.7.1
 </code></pre>
 </div>
 
-<p><strong>安装redmine的依赖库</strong></p>
+<h5 id="安装redmine的依赖库"><strong>安装redmine的依赖库</strong></h5>
 
 <p>安装bundler 工具 参考第2条修改bundler镜像源</p>
 
@@ -227,19 +220,23 @@
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install bundler
 </code></pre>
 </div>
+
+<h5 id="下载安装redmine"><strong>下载安装Redmine</strong></h5>
+
+<p>从redmine官网下载 redmine：<a href="http://www.redmine.org/releases/redmine-3.3.3.tar.gz">http://www.redmine.org/releases/redmine-3.3.3.tar.gz</a></p>
+
 <p>解压redmine后在redmine-3.3.3/下面执行</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>bundle install
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>tar zxvf redmine-3.3.3.tar.gz
+<span class="gp">$ </span>mv redmine-3.3.3 redmine
+<span class="gp">$ </span><span class="nb">cd </span>redmine
+<span class="gp">$ </span>bundle install
+<span class="gp">$ </span>cp -a config/database.yml.example config/database.yml
+<span class="gp">$ </span>cp -a config/configuration.yml.example config/configuration.yml
 </code></pre>
 </div>
 
-<p><strong>修改配置文件并初始化数据库和数据</strong></p>
-
-<p>创建数据库</p>
-
-<pre><code class="language-mysql">CREATE DATABASE IF NOT EXISTS redmine DEFAULT CHARSET utf8;
-CREATE DATABASE IF NOT EXISTS redmine_development DEFAULT CHARSET utf8;
-CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
-</code></pre>
+<h5 id="修改配置文件并初始化数据库和数据"><strong>修改配置文件并初始化数据库和数据</strong></h5>
 
 <p>配置文件为config/database.yml</p>
 
@@ -275,6 +272,12 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
   <span class="py">encoding</span><span class="p">:</span> <span class="s">utf8</span>
 </code></pre>
 </div>
+<p>创建数据库</p>
+
+<pre><code class="language-mysql">CREATE DATABASE IF NOT EXISTS redmine DEFAULT CHARSET utf8;
+CREATE DATABASE IF NOT EXISTS redmine_development DEFAULT CHARSET utf8;
+CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
+</code></pre>
 
 <p>为Rails生成cookies秘钥</p>
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rake generate_secret_token
@@ -289,7 +292,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 </code></pre>
 </div>
 
-<p><strong>配置nginx.conf</strong></p>
+<h5 id="配置nginxconf"><strong>配置nginx.conf</strong></h5>
 
 <div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="err">server</span> <span class="err">{</span>
             <span class="err">listen</span>       <span class="err">3000;</span>
@@ -307,14 +310,10 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 
 <p>安装期间可能碰到库或者软件版本不兼容的问题，需要逐个排查。</p>
 
-<p><strong>其他</strong></p>
+<h5 id="其他"><strong>其他</strong></h5>
 
 <ul>
-  <li>
-    <p>页面优化</p>
-
-    <p>优化点：</p>
-  </li>
+  <li><strong>页面优化</strong></li>
 </ul>
 
 <ol>
@@ -388,6 +387,80 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 </code></pre>
 </div>
 
+<ul>
+  <li><strong>配置邮箱功能</strong></li>
+</ul>
+
+<p>配置文件为config/configuration.yml。address 选项配置邮件服务器， port 是端口，user_name 配置供 Redmine 使用的邮件账号， Redmine 向用户发送邮件时就使用它，因此还要设置 password 。（以阿里企业邮箱为例）</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># default configuration options for all environments
+</span><span class="py">default</span><span class="p">:</span>
+  <span class="c"># Outgoing emails configuration
+</span>  <span class="c"># See the examples below and the Rails guide for more configuration options:
+</span>  <span class="c"># http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration
+</span>  <span class="py">email_delivery</span><span class="p">:</span>
+        <span class="py">delivery_method</span><span class="p">:</span> <span class="s">:smtp</span>
+        <span class="py">smtp_settings</span><span class="p">:</span>
+                <span class="py">ssl</span><span class="p">:</span> <span class="s">true</span>
+                <span class="py">address</span><span class="p">:</span> <span class="s">"smtp.qiye.aliyun.com"</span>
+                <span class="py">port</span><span class="p">:</span> <span class="s">465</span>
+                <span class="py">authentication</span><span class="p">:</span> <span class="s">:login</span>
+                <span class="py">domain</span><span class="p">:</span> <span class="s">'mmmm.com'</span>
+                <span class="py">user_name</span><span class="p">:</span> <span class="s">'redmine@mmmm.com'</span>
+                <span class="py">password</span><span class="p">:</span> <span class="s">'xxxxxx'</span>
+                <span class="py">enable_starttls_auto</span><span class="p">:</span> <span class="s">true</span>
+                <span class="py">openssl_verify_mode</span><span class="p">:</span> <span class="s">'none'</span>
+
+</code></pre>
+</div>
+
+<p>配置好邮件服务器和账号后，就可以在redmine管理后台测试邮件功能了，具体操作，见下图了解：</p>
+
+<p><img src="/assets/images/2018/redmine-test-email.png" alt="redmine-test-email" /></p>
+
+<ul>
+  <li><strong>配置定时备份</strong></li>
+</ul>
+
+<p><strong>安装crontab</strong></p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>yum install vixie-cron
+<span class="gp">$ </span>yum install crontabs
+</code></pre>
+</div>
+<p>说明：
+vixie-cron软件包是cron的主程序；
+crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进程的表格的程序。</p>
+
+<p>cron 是linux的内置服务，但它不自动起来，可以用以下的方法启动、关闭这个服务：</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>service crond start <span class="c">#启动服务</span>
+<span class="gp">$ </span>service crond stop <span class="c">#关闭服务</span>
+<span class="gp">$ </span>service crond restart <span class="c">#重启服务</span>
+<span class="gp">$ </span>service crond reload <span class="c">#重新载入配置</span>
+</code></pre>
+</div>
+<p>查看crontab服务状态：</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>service crond status
+</code></pre>
+</div>
+<p>手动启动crontab服务：</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>service crond start
+</code></pre>
+</div>
+
+<p><strong>使用crontab创建定时任务</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>crontab -e
+</code></pre>
+</div>
+
+<p>加入：</p>
+
+<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="err">01</span> <span class="err">23</span> <span class="err">*</span> <span class="err">*</span> <span class="err">*</span> <span class="err">/bin/sh</span> <span class="err">/home/www/script/redmine_database_backup.sh</span> <span class="err">&gt;</span> <span class="err">/home/www/script/redmine_database_backup.log</span>
+</code></pre>
+</div>
+
+<p>再重启cron服务即可。</p>
+
   </section>
 </article>
 
@@ -436,7 +509,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
             <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-06-19 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-06-21 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <span class="footer__copyright">本站由 <a href="http://webbleen.com">@webbleen</a> 创建，采用 <a href="https://github.com/webbleen/wno-jekyll">Wno - Jekyll</a> 作为主题 - &copy; 2018</span>
     </footer>
 </section>
