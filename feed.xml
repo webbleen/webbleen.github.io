@@ -5,8 +5,8 @@
     <description>昔我往矣，杨柳依依。今我来思，雨雪霏霏。</description>
     <link>http://webbleen.com/</link>
     <atom:link href="http://webbleen.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 06 Jul 2018 15:08:39 +0800</pubDate>
-    <lastBuildDate>Fri, 06 Jul 2018 15:08:39 +0800</lastBuildDate>
+    <pubDate>Fri, 06 Jul 2018 16:17:51 +0800</pubDate>
+    <lastBuildDate>Fri, 06 Jul 2018 16:17:51 +0800</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -248,31 +248,31 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 
 &lt;span class=&quot;c&quot;&gt;# 文尾添加
 &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/*Not&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Started*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#1166a4;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#1166a4;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-1 td.subject a{color: #1166a4;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*In&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Progress*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-2&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#00bcd4;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-2&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#00bcd4;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-2 td.subject a{color: #00bcd4;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Has&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Resolved*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#4caf50;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#4caf50;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-3 td.subject a{color: #4caf50;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Feedback*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#edbcff;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#edbcff;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-4 td.subject a{color: #edbcff;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Has&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Closed*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cccccc;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cccccc;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-5 td.subject a{text-decoration: line-through;color: #cccccc;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Has&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Refused*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-6&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cc0000;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-6&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cc0000;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-6 td.subject a{color: #cc0000;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Merge&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Request*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-7&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffeb3b;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-7&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffeb3b;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-7 td.subject a{color: #ffeb3b;}&lt;/span&gt;
 
 
