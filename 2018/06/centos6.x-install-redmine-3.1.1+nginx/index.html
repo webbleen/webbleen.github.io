@@ -375,6 +375,64 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 <span class="err">}</span>
 <span class="err">/**************end</span> <span class="err">change***************/</span>
 
+<span class="c"># 文尾添加
+</span><span class="err">/*Not</span> <span class="err">Started*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-1</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#1166a4;}
+</span><span class="s">table.list tbody tr.status-1 td.subject a{color: #1166a4;}</span>
+
+<span class="err">/*In</span> <span class="err">Progress*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-2</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#00bcd4;}
+</span><span class="s">table.list tbody tr.status-2 td.subject a{color: #00bcd4;}</span>
+
+<span class="err">/*Has</span> <span class="err">Resolved*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-3</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#4caf50;}
+</span><span class="s">table.list tbody tr.status-3 td.subject a{color: #4caf50;}</span>
+
+<span class="err">/*Feedback*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-4</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#edbcff;}
+</span><span class="s">table.list tbody tr.status-4 td.subject a{color: #edbcff;}</span>
+
+<span class="err">/*Has</span> <span class="err">Closed*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-5</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#cccccc;}
+</span><span class="s">table.list tbody tr.status-5 td.subject a{text-decoration: line-through;color: #cccccc;}</span>
+
+<span class="err">/*Has</span> <span class="err">Refused*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-6</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#cc0000;}
+</span><span class="s">table.list tbody tr.status-6 td.subject a{color: #cc0000;}</span>
+
+<span class="err">/*Merge</span> <span class="err">Request*/</span>
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-7</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">color</span><span class="p">:</span> <span class="c">#ffeb3b;}
+</span><span class="s">table.list tbody tr.status-7 td.subject a{color: #ffeb3b;}</span>
+
+
+<span class="err">tr.odd.priority-5,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">5</span><span class="p">:</span><span class="s">hover { color: #900; font-weight: bold; }</span>
+<span class="err">tr.odd.priority-5</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffc4c4; }
+</span><span class="s">tr.even.priority-5, table.list tbody tr.even.priority-5:hover { color: #900; font-weight: bold; }</span>
+<span class="err">tr.even.priority-5</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffd4d4; }
+</span><span class="s">tr.priority-5 a, tr.priority-5:hover a { color: #900; }</span>
+<span class="err">tr.odd.priority-5</span> <span class="err">td,</span> <span class="err">tr.even.priority-5</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#ffb4b4; }
+</span>
+<span class="err">tr.odd.priority-4,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">4</span><span class="p">:</span><span class="s">hover { color: #900; }</span>
+<span class="err">tr.odd.priority-4</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffc4c4; }
+</span><span class="s">tr.even.priority-4, table.list tbody tr.even.priority-4:hover { color: #900; }</span>
+<span class="err">tr.even.priority-4</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffd4d4; }
+</span><span class="s">tr.priority-4 a { color: #900; }</span>
+<span class="err">tr.odd.priority-4</span> <span class="err">td,</span> <span class="err">tr.even.priority-4</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#ffb4b4; }
+</span>
+<span class="err">tr.odd.priority-3,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">3</span><span class="p">:</span><span class="s">hover { color: #900; }</span>
+<span class="err">tr.odd.priority-3</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#fee; }
+</span><span class="s">tr.even.priority-3, table.list tbody tr.even.priority-3:hover { color: #900; }</span>
+<span class="err">tr.even.priority-3</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#fff2f2; }
+</span><span class="s">tr.priority-3 a { color: #900; }</span>
+<span class="err">tr.odd.priority-3</span> <span class="err">td,</span> <span class="err">tr.even.priority-3</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#fcc; }
+</span>
+<span class="err">tr.odd.priority-1,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">1</span><span class="p">:</span><span class="s">hover { color: #559; }</span>
+<span class="err">tr.odd.priority-1</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#eaf7ff; }
+</span><span class="s">tr.even.priority-1, table.list tbody tr.even.priority-1:hover { color: #559; }</span>
+<span class="err">tr.even.priority-1</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#f2faff; }
+</span><span class="s">tr.priority-1 a { color: #559; }</span>
+<span class="err">tr.odd.priority-1</span> <span class="err">td,</span> <span class="err">tr.even.priority-1</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#add7f3; }
+</span>
 <span class="c"># 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/javascripts/ application.js
 # 在651行后追加
 </span><span class="err">$(function(){</span>
@@ -499,7 +557,7 @@ crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进
             <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-06-21 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-07-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <span class="footer__copyright">本站由 <a href="http://webbleen.com">@webbleen</a> 创建，采用 <a href="https://github.com/webbleen/wno-jekyll">Wno - Jekyll</a> 作为主题 - &copy; 2018</span>
     </footer>
 </section>
