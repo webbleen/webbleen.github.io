@@ -5,9 +5,9 @@
     <description>昔我往矣，杨柳依依。今我来思，雨雪霏霏。</description>
     <link>http://webbleen.com/</link>
     <atom:link href="http://webbleen.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 06 Jul 2018 16:17:51 +0800</pubDate>
-    <lastBuildDate>Fri, 06 Jul 2018 16:17:51 +0800</lastBuildDate>
-    <generator>Jekyll v3.4.0</generator>
+    <pubDate>Sat, 22 Jun 2019 14:34:26 +0900</pubDate>
+    <lastBuildDate>Sat, 22 Jun 2019 14:34:26 +0900</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>centos6.x 部署redmine-3.3.3+nginx</title>
@@ -49,46 +49,38 @@
 
 &lt;h5 id=&quot;需要的基础库&quot;&gt;&lt;strong&gt;需要的基础库&lt;/strong&gt;&lt;/h5&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;yum -y install libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h5 id=&quot;配置gem镜像源&quot;&gt;&lt;strong&gt;配置gem镜像源&lt;/strong&gt;&lt;/h5&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem sources -l
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem sources &lt;span class=&quot;nt&quot;&gt;--add&lt;/span&gt; https://gems.ruby-china.org/ &lt;span class=&quot;nt&quot;&gt;--remove&lt;/span&gt; https://rubygems.org/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem sources &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;https://gems.ruby-china.org #确保只有 gems.ruby-china.org&lt;/p&gt;
 
 &lt;h5 id=&quot;安装passenger用于整合nginx&quot;&gt;&lt;strong&gt;安装Passenger（用于整合Nginx）&lt;/strong&gt;&lt;/h5&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem install passenger
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;passenger-install-nginx-module
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;passenger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;passenger-install-nginx-module
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;按照提示步骤一步步操作&lt;/p&gt;
 
 &lt;h5 id=&quot;安装框架rails&quot;&gt;&lt;strong&gt;安装框架rails&lt;/strong&gt;&lt;/h5&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem install rails -v&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4.2.7.1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;rails &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4.2.7.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h5 id=&quot;安装redmine的依赖库&quot;&gt;&lt;strong&gt;安装redmine的依赖库&lt;/strong&gt;&lt;/h5&gt;
 
 &lt;p&gt;安装bundler 工具 参考第2条修改bundler镜像源&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;gem install bundler
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bundler
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h5 id=&quot;下载安装redmine&quot;&gt;&lt;strong&gt;下载安装Redmine&lt;/strong&gt;&lt;/h5&gt;
 
@@ -96,20 +88,19 @@
 
 &lt;p&gt;解压redmine后在redmine-3.3.3/下面执行&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;tar zxvf redmine-3.3.3.tar.gz
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mv redmine-3.3.3 redmine
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;redmine
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;bundle install
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cp -a config/database.yml.example config/database.yml
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cp -a config/configuration.yml.example config/configuration.yml
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;zxvf redmine-3.3.3.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;redmine-3.3.3 redmine
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;redmine
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; config/database.yml.example config/database.yml
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; config/configuration.yml.example config/configuration.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h5 id=&quot;修改配置文件并初始化数据库和数据&quot;&gt;&lt;strong&gt;修改配置文件并初始化数据库和数据&lt;/strong&gt;&lt;/h5&gt;
 
 &lt;p&gt;配置文件为config/database.yml&lt;/p&gt;
 
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Default setup is given for MySQL with ruby1.9.
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Default setup is given for MySQL with ruby1.9.
 # Examples for PostgreSQL, SQLite3 and SQL Server can be found at the end.
 # Line indentation must be 2 spaces (no tabs).
 &lt;/span&gt;
@@ -139,8 +130,7 @@
   &lt;span class=&quot;py&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;
   &lt;span class=&quot;py&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;****&quot;&lt;/span&gt;
   &lt;span class=&quot;py&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;创建数据库&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;CREATE DATABASE IF NOT EXISTS redmine DEFAULT CHARSET utf8;
@@ -149,21 +139,18 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;为Rails生成cookies秘钥&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;rake generate_secret_token
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake generate_secret_token
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;创建数据库结构&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RAILS_ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;production rake db:migrate
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ RAILS_ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;production rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;生成缺省数据&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;RAILS_ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;production &lt;span class=&quot;nv&quot;&gt;REDMINE_LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;zh rake redmine:load_default_data
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ RAILS_ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;production &lt;span class=&quot;nv&quot;&gt;REDMINE_LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;zh rake redmine:load_default_data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h5 id=&quot;配置nginxconf&quot;&gt;&lt;strong&gt;配置nginx.conf&lt;/strong&gt;&lt;/h5&gt;
 
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;err&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;err&quot;&gt;3000;&lt;/span&gt;
             &lt;span class=&quot;err&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;py&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3000;&lt;/span&gt;
             &lt;span class=&quot;c&quot;&gt;# server_name  somename  alias  another.alias;
@@ -174,8 +161,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
             &lt;span class=&quot;err&quot;&gt;index&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;index.html&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;index.htm;&lt;/span&gt;
     &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;安装期间可能碰到库或者软件版本不兼容的问题，需要逐个排查。&lt;/p&gt;
 
@@ -200,19 +186,19 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 
 &lt;p&gt;修改：&lt;/p&gt;
 
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 邮件字体大小调整
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 邮件字体大小调整
 # 文件：app\views\layouts\mailer.html.erb
 # 第6行
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.8em; &lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.8em; &lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 改为：
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;14px;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;14px;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 其它
 &lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/stylesheets/application.css
 # 第2行
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 修改为
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;font-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;微软雅黑,Verdana, sans-serif; font-size: 13px; color:#484848; margin: 0; padding: 0; min-width: 900px; }&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;微软雅黑,Verdana, sans-serif; font-size: 13px; color:#484848; margin: 0; padding: 0; min-width: 900px; }&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# 第73行
 #sidebar{ float: right; width: 22%; position: relative; z-index: 9; padding: 0; margin: 0;}
@@ -220,9 +206,9 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 #sidebar{ float: right; width: 12%; position: relative; z-index: 9; padding: 0; margin: 0;}
 &lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 第127行
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center; vertical-align:top; padding-right:10px;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;text-align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center; vertical-align:top; padding-right:10px;}&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 改成
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center; vertical-align:middle; padding-right:10px;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;text-align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;center; vertical-align:middle; padding-right:10px;}&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# 第131行
 &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.checkbox&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;15px; padding: 2px 0 0 0; }&lt;/span&gt;
@@ -230,10 +216,10 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.checkbox&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;15px; padding: 2px 0 0 0;height: 30px; }&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# 第155行
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.category,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.assigned_to,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.string,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.text,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.relations,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.parent&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;white-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;normal; }&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.category,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.assigned_to,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.string,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.text,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.relations,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.parent&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;white-space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;normal; }&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 修改为
 &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/**************change***************/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.category,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.assigned_to,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.string,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.text,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.relations,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.parent&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;white-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nowrap;text-align: justify;word-break:break-all; }&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.category,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.assigned_to,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.string,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.text,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.relations,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.parent&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;white-space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nowrap;text-align: justify;word-break:break-all; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.issue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.subject{&lt;/span&gt;
  &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;260px;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
@@ -241,68 +227,68 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
   &lt;span class=&quot;py&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;block;&lt;/span&gt;
   &lt;span class=&quot;py&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hidden;&lt;/span&gt;
   &lt;span class=&quot;py&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;300px;&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ellipsis;&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;text-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;left;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;text-overflow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ellipsis;&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;text-align&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;left;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;/**************end&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;change***************/&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# 文尾添加
 &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/*Not&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Started*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#1166a4;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#1166a4;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-1 td.subject a{color: #1166a4;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*In&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Progress*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-2&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#00bcd4;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-2&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#00bcd4;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-2 td.subject a{color: #00bcd4;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Has&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Resolved*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#4caf50;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#4caf50;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-3 td.subject a{color: #4caf50;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Feedback*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#edbcff;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#edbcff;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-4 td.subject a{color: #edbcff;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Has&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Closed*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cccccc;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cccccc;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-5 td.subject a{text-decoration: line-through;color: #cccccc;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Has&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Refused*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-6&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cc0000;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-6&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#cc0000;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-6 td.subject a{color: #cc0000;}&lt;/span&gt;
 
 &lt;span class=&quot;err&quot;&gt;/*Merge&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Request*/&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-7&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{background-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffeb3b;}
+&lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.status-7&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td.status&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffeb3b;}
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;table.list tbody tr.status-7 td.subject a{color: #ffeb3b;}&lt;/span&gt;
 
 
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-5,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.odd.priority-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #900; font-weight: bold; }&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-5,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;tr.odd.priority-5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #900; font-weight: bold; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.odd.priority-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffc4c4; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.even.priority-5, table.list tbody tr.even.priority-5:hover { color: #900; font-weight: bold; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.even.priority-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffd4d4; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.priority-5 a, tr.priority-5:hover a { color: #900; }&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;border-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffb4b4; }
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-5&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffb4b4; }
 &lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-4,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.odd.priority-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #900; }&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-4,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;tr.odd.priority-4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #900; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.odd.priority-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffc4c4; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.even.priority-4, table.list tbody tr.even.priority-4:hover { color: #900; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.even.priority-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffd4d4; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.priority-4 a { color: #900; }&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;border-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffb4b4; }
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-4&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#ffb4b4; }
 &lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-3,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.odd.priority-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #900; }&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-3,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;tr.odd.priority-3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #900; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.odd.priority-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#fee; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.even.priority-3, table.list tbody tr.even.priority-3:hover { color: #900; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.even.priority-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#fff2f2; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.priority-3 a { color: #900; }&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;border-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#fcc; }
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-3&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#fcc; }
 &lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-1,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.odd.priority-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #559; }&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-1,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;table.list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tbody&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;tr.odd.priority-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hover { color: #559; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.odd.priority-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#eaf7ff; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.even.priority-1, table.list tbody tr.even.priority-1:hover { color: #559; }&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;tr.even.priority-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#f2faff; }
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tr.priority-1 a { color: #559; }&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;tr.odd.priority-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;border-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#add7f3; }
+&lt;span class=&quot;err&quot;&gt;tr.odd.priority-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;tr.even.priority-1&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#add7f3; }
 &lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/javascripts/ application.js
 # 在651行后追加
@@ -311,8 +297,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 	      &lt;span class=&quot;err&quot;&gt;$(this).attr('title',$(this).html());&lt;/span&gt;
 	&lt;span class=&quot;err&quot;&gt;});&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;配置邮箱功能&lt;/strong&gt;&lt;/li&gt;
@@ -320,7 +305,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 
 &lt;p&gt;配置文件为config/configuration.yml。address 选项配置邮件服务器， port 是端口，user_name 配置供 Redmine 使用的邮件账号， Redmine 向用户发送邮件时就使用它，因此还要设置 password 。（以阿里企业邮箱为例）&lt;/p&gt;
 
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# default configuration options for all environments
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# default configuration options for all environments
 &lt;/span&gt;&lt;span class=&quot;py&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;c&quot;&gt;# Outgoing emails configuration
 &lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# See the examples below and the Rails guide for more configuration options:
@@ -338,8 +323,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
                 &lt;span class=&quot;py&quot;&gt;enable_starttls_auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
                 &lt;span class=&quot;py&quot;&gt;openssl_verify_mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'none'&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;配置好邮件服务器和账号后，就可以在redmine管理后台测试邮件功能了，具体操作，见下图了解：&lt;/p&gt;
 
@@ -350,45 +334,39 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;安装crontab&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;yum install vixie-cron
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;yum install crontabs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;vixie-cron
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;crontabs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;说明：
 vixie-cron软件包是cron的主程序；
 crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进程的表格的程序。&lt;/p&gt;
 
 &lt;p&gt;cron 是linux的内置服务，但它不自动起来，可以用以下的方法启动、关闭这个服务：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;service crond start &lt;span class=&quot;c&quot;&gt;#启动服务&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;service crond stop &lt;span class=&quot;c&quot;&gt;#关闭服务&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;service crond restart &lt;span class=&quot;c&quot;&gt;#重启服务&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;service crond reload &lt;span class=&quot;c&quot;&gt;#重新载入配置&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service crond start &lt;span class=&quot;c&quot;&gt;#启动服务&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service crond stop &lt;span class=&quot;c&quot;&gt;#关闭服务&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service crond restart &lt;span class=&quot;c&quot;&gt;#重启服务&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service crond reload &lt;span class=&quot;c&quot;&gt;#重新载入配置&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;查看crontab服务状态：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;service crond status
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service crond status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;手动启动crontab服务：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;service crond start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service crond start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;使用crontab创建定时任务&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;crontab -e
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;crontab &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;加入：&lt;/p&gt;
 
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;01&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/bin/sh&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/home/www/script/redmine_database_backup.sh&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/home/www/script/redmine_database_backup.log&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;01&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/bin/sh&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/home/www/script/redmine_database_backup.sh&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/home/www/script/redmine_database_backup.log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;再重启cron服务即可。&lt;/p&gt;
 </description>
-        <pubDate>Tue, 19 Jun 2018 08:28:00 +0800</pubDate>
+        <pubDate>Tue, 19 Jun 2018 09:28:00 +0900</pubDate>
         <link>http://webbleen.com/2018/06/centos6.x-install-redmine-3.1.1+nginx/</link>
         <guid isPermaLink="true">http://webbleen.com/2018/06/centos6.x-install-redmine-3.1.1+nginx/</guid>
         

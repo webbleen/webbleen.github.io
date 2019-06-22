@@ -134,7 +134,7 @@
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2018-06-19 16:28:00 +1600" itemprop="datePublished" class="post-meta__date date">2018-06-19</time> &#8226; <span class="post-meta__tags tags">操作文档集</span>
+      <time datetime="2018-06-19 09:28:00 +0900" itemprop="datePublished" class="post-meta__date date">2018-06-19</time> &#8226; <span class="post-meta__tags tags">操作文档集</span>
     </div>
     <h1 class="post-title">centos6.x 部署redmine-3.3.3+nginx</h1>
   </header>
@@ -178,46 +178,38 @@
 
 <h5 id="需要的基础库"><strong>需要的基础库</strong></h5>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>yum -y install libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum <span class="nt">-y</span> <span class="nb">install </span>libyaml-devel zlib-devel curl-devel openssl-devel httpd-devel apr-devel apr-util-devel gcc ruby-devel gcc-c++ make postgresql-devel ImageMagick-devel sqlite-devel mysql-devel perl-LDAP mod_perl perl-Digest-SHA libcurl libcurl-devel libiconv libiconv-devel libxml2 libxml2-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libmcrypt libmcrypt-devel pcre pcre-devel
+</code></pre></div></div>
 
 <h5 id="配置gem镜像源"><strong>配置gem镜像源</strong></h5>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-</code></pre>
-</div>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem sources -l
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem sources <span class="nt">--add</span> https://gems.ruby-china.org/ <span class="nt">--remove</span> https://rubygems.org/
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem sources <span class="nt">-l</span>
+</code></pre></div></div>
 <p>https://gems.ruby-china.org #确保只有 gems.ruby-china.org</p>
 
 <h5 id="安装passenger用于整合nginx"><strong>安装Passenger（用于整合Nginx）</strong></h5>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install passenger
-</code></pre>
-</div>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>passenger-install-nginx-module
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem <span class="nb">install </span>passenger
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>passenger-install-nginx-module
+</code></pre></div></div>
 <p>按照提示步骤一步步操作</p>
 
 <h5 id="安装框架rails"><strong>安装框架rails</strong></h5>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install rails -v<span class="o">=</span>4.2.7.1
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem <span class="nb">install </span>rails <span class="nt">-v</span><span class="o">=</span>4.2.7.1
+</code></pre></div></div>
 
 <h5 id="安装redmine的依赖库"><strong>安装redmine的依赖库</strong></h5>
 
 <p>安装bundler 工具 参考第2条修改bundler镜像源</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-</code></pre>
-</div>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install bundler
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem <span class="nb">install </span>bundler
+</code></pre></div></div>
 
 <h5 id="下载安装redmine"><strong>下载安装Redmine</strong></h5>
 
@@ -225,20 +217,19 @@
 
 <p>解压redmine后在redmine-3.3.3/下面执行</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>tar zxvf redmine-3.3.3.tar.gz
-<span class="gp">$ </span>mv redmine-3.3.3 redmine
-<span class="gp">$ </span><span class="nb">cd </span>redmine
-<span class="gp">$ </span>bundle install
-<span class="gp">$ </span>cp -a config/database.yml.example config/database.yml
-<span class="gp">$ </span>cp -a config/configuration.yml.example config/configuration.yml
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">tar </span>zxvf redmine-3.3.3.tar.gz
+<span class="nv">$ </span><span class="nb">mv </span>redmine-3.3.3 redmine
+<span class="nv">$ </span><span class="nb">cd </span>redmine
+<span class="nv">$ </span>bundle <span class="nb">install</span>
+<span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-a</span> config/database.yml.example config/database.yml
+<span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-a</span> config/configuration.yml.example config/configuration.yml
+</code></pre></div></div>
 
 <h5 id="修改配置文件并初始化数据库和数据"><strong>修改配置文件并初始化数据库和数据</strong></h5>
 
 <p>配置文件为config/database.yml</p>
 
-<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># Default setup is given for MySQL with ruby1.9.
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Default setup is given for MySQL with ruby1.9.
 # Examples for PostgreSQL, SQLite3 and SQL Server can be found at the end.
 # Line indentation must be 2 spaces (no tabs).
 </span>
@@ -268,8 +259,7 @@
   <span class="py">username</span><span class="p">:</span> <span class="s">root</span>
   <span class="py">password</span><span class="p">:</span> <span class="s">"****"</span>
   <span class="py">encoding</span><span class="p">:</span> <span class="s">utf8</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>创建数据库</p>
 
 <pre><code class="language-mysql">CREATE DATABASE IF NOT EXISTS redmine DEFAULT CHARSET utf8;
@@ -278,21 +268,18 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 </code></pre>
 
 <p>为Rails生成cookies秘钥</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rake generate_secret_token
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rake generate_secret_token
+</code></pre></div></div>
 <p>创建数据库结构</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">RAILS_ENV</span><span class="o">=</span>production rake db:migrate
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production rake db:migrate
+</code></pre></div></div>
 <p>生成缺省数据</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">RAILS_ENV</span><span class="o">=</span>production <span class="nv">REDMINE_LANG</span><span class="o">=</span>zh rake redmine:load_default_data
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production <span class="nv">REDMINE_LANG</span><span class="o">=</span>zh rake redmine:load_default_data
+</code></pre></div></div>
 
 <h5 id="配置nginxconf"><strong>配置nginx.conf</strong></h5>
 
-<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="err">server</span> <span class="err">{</span>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">server</span> <span class="err">{</span>
             <span class="err">listen</span>       <span class="err">3000;</span>
             <span class="err">listen</span>       <span class="py">localhost</span><span class="p">:</span><span class="s">3000;</span>
             <span class="c"># server_name  somename  alias  another.alias;
@@ -303,8 +290,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
             <span class="err">index</span>  <span class="err">index.html</span> <span class="err">index.htm;</span>
     <span class="err">}</span>
 <span class="err">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>安装期间可能碰到库或者软件版本不兼容的问题，需要逐个排查。</p>
 
@@ -329,19 +315,19 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 
 <p>修改：</p>
 
-<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># 邮件字体大小调整
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 邮件字体大小调整
 # 文件：app\views\layouts\mailer.html.erb
 # 第6行
-</span><span class="err">font-</span><span class="py">size</span><span class="p">:</span> <span class="s">0.8em; </span>
+</span><span class="py">font-size</span><span class="p">:</span> <span class="s">0.8em; </span>
 <span class="c"># 改为：
-</span><span class="err">font-</span><span class="py">size</span><span class="p">:</span> <span class="s">14px;</span>
+</span><span class="py">font-size</span><span class="p">:</span> <span class="s">14px;</span>
 <span class="c"># 其它
 </span>
 <span class="c"># 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/stylesheets/application.css
 # 第2行
-</span><span class="err">body</span> <span class="err">{</span> <span class="err">font-</span><span class="py">family</span><span class="p">:</span> <span class="s">Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }</span>
+</span><span class="err">body</span> <span class="err">{</span> <span class="py">font-family</span><span class="p">:</span> <span class="s">Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }</span>
 <span class="c"># 修改为
-</span><span class="err">body</span> <span class="err">{</span> <span class="err">font-</span><span class="py">family</span><span class="p">:</span> <span class="s">微软雅黑,Verdana, sans-serif; font-size: 13px; color:#484848; margin: 0; padding: 0; min-width: 900px; }</span>
+</span><span class="err">body</span> <span class="err">{</span> <span class="py">font-family</span><span class="p">:</span> <span class="s">微软雅黑,Verdana, sans-serif; font-size: 13px; color:#484848; margin: 0; padding: 0; min-width: 900px; }</span>
 
 <span class="c"># 第73行
 #sidebar{ float: right; width: 22%; position: relative; z-index: 9; padding: 0; margin: 0;}
@@ -349,9 +335,9 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 #sidebar{ float: right; width: 12%; position: relative; z-index: 9; padding: 0; margin: 0;}
 </span>
 <span class="c"># 第127行
-</span><span class="err">table.list</span> <span class="err">td</span> <span class="err">{text-</span><span class="py">align</span><span class="p">:</span><span class="s">center; vertical-align:top; padding-right:10px;}</span>
+</span><span class="err">table.list</span> <span class="err">td</span> <span class="err">{</span><span class="py">text-align</span><span class="p">:</span><span class="s">center; vertical-align:top; padding-right:10px;}</span>
 <span class="c"># 改成
-</span><span class="err">table.list</span> <span class="err">td</span> <span class="err">{text-</span><span class="py">align</span><span class="p">:</span><span class="s">center; vertical-align:middle; padding-right:10px;}</span>
+</span><span class="err">table.list</span> <span class="err">td</span> <span class="err">{</span><span class="py">text-align</span><span class="p">:</span><span class="s">center; vertical-align:middle; padding-right:10px;}</span>
 
 <span class="c"># 第131行
 </span><span class="err">table.list</span> <span class="err">td.checkbox</span> <span class="err">{</span> <span class="py">width</span><span class="p">:</span> <span class="s">15px; padding: 2px 0 0 0; }</span>
@@ -359,10 +345,10 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 </span><span class="err">table.list</span> <span class="err">td.checkbox</span> <span class="err">{</span> <span class="py">width</span><span class="p">:</span> <span class="s">15px; padding: 2px 0 0 0;height: 30px; }</span>
 
 <span class="c"># 第155行
-</span><span class="err">tr.issue</span> <span class="err">td.subject,</span> <span class="err">tr.issue</span> <span class="err">td.category,</span> <span class="err">td.assigned_to,</span> <span class="err">tr.issue</span> <span class="err">td.string,</span> <span class="err">tr.issue</span> <span class="err">td.text,</span> <span class="err">tr.issue</span> <span class="err">td.relations,</span> <span class="err">tr.issue</span> <span class="err">td.parent</span> <span class="err">{</span> <span class="err">white-</span><span class="py">space</span><span class="p">:</span> <span class="s">normal; }</span>
+</span><span class="err">tr.issue</span> <span class="err">td.subject,</span> <span class="err">tr.issue</span> <span class="err">td.category,</span> <span class="err">td.assigned_to,</span> <span class="err">tr.issue</span> <span class="err">td.string,</span> <span class="err">tr.issue</span> <span class="err">td.text,</span> <span class="err">tr.issue</span> <span class="err">td.relations,</span> <span class="err">tr.issue</span> <span class="err">td.parent</span> <span class="err">{</span> <span class="py">white-space</span><span class="p">:</span> <span class="s">normal; }</span>
 <span class="c"># 修改为
 </span><span class="err">/**************change***************/</span>
-<span class="err">tr.issue</span> <span class="err">td.subject,</span> <span class="err">tr.issue</span> <span class="err">td.category,</span> <span class="err">td.assigned_to,</span> <span class="err">tr.issue</span> <span class="err">td.string,</span> <span class="err">tr.issue</span> <span class="err">td.text,</span> <span class="err">tr.issue</span> <span class="err">td.relations,</span> <span class="err">tr.issue</span> <span class="err">td.parent</span> <span class="err">{</span> <span class="err">white-</span><span class="py">space</span><span class="p">:</span> <span class="s">nowrap;text-align: justify;word-break:break-all; }</span>
+<span class="err">tr.issue</span> <span class="err">td.subject,</span> <span class="err">tr.issue</span> <span class="err">td.category,</span> <span class="err">td.assigned_to,</span> <span class="err">tr.issue</span> <span class="err">td.string,</span> <span class="err">tr.issue</span> <span class="err">td.text,</span> <span class="err">tr.issue</span> <span class="err">td.relations,</span> <span class="err">tr.issue</span> <span class="err">td.parent</span> <span class="err">{</span> <span class="py">white-space</span><span class="p">:</span> <span class="s">nowrap;text-align: justify;word-break:break-all; }</span>
 <span class="err">tr.issue</span> <span class="err">td.subject{</span>
  <span class="py">width</span><span class="p">:</span> <span class="s">260px;</span>
 <span class="err">}</span>
@@ -370,68 +356,68 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
   <span class="py">display</span><span class="p">:</span> <span class="s">block;</span>
   <span class="py">overflow</span><span class="p">:</span><span class="s">hidden;</span>
   <span class="py">width</span><span class="p">:</span> <span class="s">300px;</span>
-  <span class="err">text-</span><span class="py">overflow</span><span class="p">:</span><span class="s">ellipsis;</span>
-  <span class="err">text-</span><span class="py">align</span><span class="p">:</span> <span class="s">left;</span>
+  <span class="py">text-overflow</span><span class="p">:</span><span class="s">ellipsis;</span>
+  <span class="py">text-align</span><span class="p">:</span> <span class="s">left;</span>
 <span class="err">}</span>
 <span class="err">/**************end</span> <span class="err">change***************/</span>
 
 <span class="c"># 文尾添加
 </span><span class="err">/*Not</span> <span class="err">Started*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-1</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#1166a4;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-1</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#1166a4;}
 </span><span class="s">table.list tbody tr.status-1 td.subject a{color: #1166a4;}</span>
 
 <span class="err">/*In</span> <span class="err">Progress*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-2</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#00bcd4;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-2</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#00bcd4;}
 </span><span class="s">table.list tbody tr.status-2 td.subject a{color: #00bcd4;}</span>
 
 <span class="err">/*Has</span> <span class="err">Resolved*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-3</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#4caf50;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-3</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#4caf50;}
 </span><span class="s">table.list tbody tr.status-3 td.subject a{color: #4caf50;}</span>
 
 <span class="err">/*Feedback*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-4</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#edbcff;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-4</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#edbcff;}
 </span><span class="s">table.list tbody tr.status-4 td.subject a{color: #edbcff;}</span>
 
 <span class="err">/*Has</span> <span class="err">Closed*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-5</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#cccccc;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-5</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#cccccc;}
 </span><span class="s">table.list tbody tr.status-5 td.subject a{text-decoration: line-through;color: #cccccc;}</span>
 
 <span class="err">/*Has</span> <span class="err">Refused*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-6</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#cc0000;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-6</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#cc0000;}
 </span><span class="s">table.list tbody tr.status-6 td.subject a{color: #cc0000;}</span>
 
 <span class="err">/*Merge</span> <span class="err">Request*/</span>
-<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-7</span> <span class="err">td.status</span> <span class="err">{background-</span><span class="py">color</span><span class="p">:</span> <span class="c">#ffeb3b;}
+<span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.status-7</span> <span class="err">td.status</span> <span class="err">{</span><span class="py">background-color</span><span class="p">:</span> <span class="c">#ffeb3b;}
 </span><span class="s">table.list tbody tr.status-7 td.subject a{color: #ffeb3b;}</span>
 
 
-<span class="err">tr.odd.priority-5,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">5</span><span class="p">:</span><span class="s">hover { color: #900; font-weight: bold; }</span>
+<span class="err">tr.odd.priority-5,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="py">tr.odd.priority-5</span><span class="p">:</span><span class="s">hover { color: #900; font-weight: bold; }</span>
 <span class="err">tr.odd.priority-5</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffc4c4; }
 </span><span class="s">tr.even.priority-5, table.list tbody tr.even.priority-5:hover { color: #900; font-weight: bold; }</span>
 <span class="err">tr.even.priority-5</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffd4d4; }
 </span><span class="s">tr.priority-5 a, tr.priority-5:hover a { color: #900; }</span>
-<span class="err">tr.odd.priority-5</span> <span class="err">td,</span> <span class="err">tr.even.priority-5</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#ffb4b4; }
+<span class="err">tr.odd.priority-5</span> <span class="err">td,</span> <span class="err">tr.even.priority-5</span> <span class="err">td</span> <span class="err">{</span> <span class="py">border-color</span><span class="p">:</span> <span class="c">#ffb4b4; }
 </span>
-<span class="err">tr.odd.priority-4,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">4</span><span class="p">:</span><span class="s">hover { color: #900; }</span>
+<span class="err">tr.odd.priority-4,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="py">tr.odd.priority-4</span><span class="p">:</span><span class="s">hover { color: #900; }</span>
 <span class="err">tr.odd.priority-4</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffc4c4; }
 </span><span class="s">tr.even.priority-4, table.list tbody tr.even.priority-4:hover { color: #900; }</span>
 <span class="err">tr.even.priority-4</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#ffd4d4; }
 </span><span class="s">tr.priority-4 a { color: #900; }</span>
-<span class="err">tr.odd.priority-4</span> <span class="err">td,</span> <span class="err">tr.even.priority-4</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#ffb4b4; }
+<span class="err">tr.odd.priority-4</span> <span class="err">td,</span> <span class="err">tr.even.priority-4</span> <span class="err">td</span> <span class="err">{</span> <span class="py">border-color</span><span class="p">:</span> <span class="c">#ffb4b4; }
 </span>
-<span class="err">tr.odd.priority-3,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">3</span><span class="p">:</span><span class="s">hover { color: #900; }</span>
+<span class="err">tr.odd.priority-3,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="py">tr.odd.priority-3</span><span class="p">:</span><span class="s">hover { color: #900; }</span>
 <span class="err">tr.odd.priority-3</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#fee; }
 </span><span class="s">tr.even.priority-3, table.list tbody tr.even.priority-3:hover { color: #900; }</span>
 <span class="err">tr.even.priority-3</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#fff2f2; }
 </span><span class="s">tr.priority-3 a { color: #900; }</span>
-<span class="err">tr.odd.priority-3</span> <span class="err">td,</span> <span class="err">tr.even.priority-3</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#fcc; }
+<span class="err">tr.odd.priority-3</span> <span class="err">td,</span> <span class="err">tr.even.priority-3</span> <span class="err">td</span> <span class="err">{</span> <span class="py">border-color</span><span class="p">:</span> <span class="c">#fcc; }
 </span>
-<span class="err">tr.odd.priority-1,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="err">tr.odd.priority-</span><span class="py">1</span><span class="p">:</span><span class="s">hover { color: #559; }</span>
+<span class="err">tr.odd.priority-1,</span> <span class="err">table.list</span> <span class="err">tbody</span> <span class="py">tr.odd.priority-1</span><span class="p">:</span><span class="s">hover { color: #559; }</span>
 <span class="err">tr.odd.priority-1</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#eaf7ff; }
 </span><span class="s">tr.even.priority-1, table.list tbody tr.even.priority-1:hover { color: #559; }</span>
 <span class="err">tr.even.priority-1</span> <span class="err">{</span> <span class="py">background</span><span class="p">:</span> <span class="c">#f2faff; }
 </span><span class="s">tr.priority-1 a { color: #559; }</span>
-<span class="err">tr.odd.priority-1</span> <span class="err">td,</span> <span class="err">tr.even.priority-1</span> <span class="err">td</span> <span class="err">{</span> <span class="err">border-</span><span class="py">color</span><span class="p">:</span> <span class="c">#add7f3; }
+<span class="err">tr.odd.priority-1</span> <span class="err">td,</span> <span class="err">tr.even.priority-1</span> <span class="err">td</span> <span class="err">{</span> <span class="py">border-color</span><span class="p">:</span> <span class="c">#add7f3; }
 </span>
 <span class="c"># 文件：/opt/redmine-3.0.0-0/apps/redmine/htdocs/public/javascripts/ application.js
 # 在651行后追加
@@ -440,8 +426,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 	      <span class="err">$(this).attr('title',$(this).html());</span>
 	<span class="err">});</span>
 <span class="err">});</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>配置邮箱功能</strong></li>
@@ -449,7 +434,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 
 <p>配置文件为config/configuration.yml。address 选项配置邮件服务器， port 是端口，user_name 配置供 Redmine 使用的邮件账号， Redmine 向用户发送邮件时就使用它，因此还要设置 password 。（以阿里企业邮箱为例）</p>
 
-<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="c"># default configuration options for all environments
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># default configuration options for all environments
 </span><span class="py">default</span><span class="p">:</span>
   <span class="c"># Outgoing emails configuration
 </span>  <span class="c"># See the examples below and the Rails guide for more configuration options:
@@ -467,8 +452,7 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
                 <span class="py">enable_starttls_auto</span><span class="p">:</span> <span class="s">true</span>
                 <span class="py">openssl_verify_mode</span><span class="p">:</span> <span class="s">'none'</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>配置好邮件服务器和账号后，就可以在redmine管理后台测试邮件功能了，具体操作，见下图了解：</p>
 
@@ -479,41 +463,35 @@ CREATE DATABASE IF NOT EXISTS redmine_test DEFAULT CHARSET utf8;
 </ul>
 
 <p><strong>安装crontab</strong></p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>yum install vixie-cron
-<span class="gp">$ </span>yum install crontabs
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum <span class="nb">install </span>vixie-cron
+<span class="nv">$ </span>yum <span class="nb">install </span>crontabs
+</code></pre></div></div>
 <p>说明：
 vixie-cron软件包是cron的主程序；
 crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进程的表格的程序。</p>
 
 <p>cron 是linux的内置服务，但它不自动起来，可以用以下的方法启动、关闭这个服务：</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>service crond start <span class="c">#启动服务</span>
-<span class="gp">$ </span>service crond stop <span class="c">#关闭服务</span>
-<span class="gp">$ </span>service crond restart <span class="c">#重启服务</span>
-<span class="gp">$ </span>service crond reload <span class="c">#重新载入配置</span>
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>service crond start <span class="c">#启动服务</span>
+<span class="nv">$ </span>service crond stop <span class="c">#关闭服务</span>
+<span class="nv">$ </span>service crond restart <span class="c">#重启服务</span>
+<span class="nv">$ </span>service crond reload <span class="c">#重新载入配置</span>
+</code></pre></div></div>
 <p>查看crontab服务状态：</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>service crond status
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>service crond status
+</code></pre></div></div>
 <p>手动启动crontab服务：</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>service crond start
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>service crond start
+</code></pre></div></div>
 
 <p><strong>使用crontab创建定时任务</strong></p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>crontab -e
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>crontab <span class="nt">-e</span>
+</code></pre></div></div>
 
 <p>加入：</p>
 
-<div class="language-properties highlighter-rouge"><pre class="highlight"><code><span class="err">01</span> <span class="err">23</span> <span class="err">*</span> <span class="err">*</span> <span class="err">*</span> <span class="err">/bin/sh</span> <span class="err">/home/www/script/redmine_database_backup.sh</span> <span class="err">&gt;</span> <span class="err">/home/www/script/redmine_database_backup.log</span>
-</code></pre>
-</div>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">01</span> <span class="err">23</span> <span class="err">*</span> <span class="err">*</span> <span class="err">*</span> <span class="err">/bin/sh</span> <span class="err">/home/www/script/redmine_database_backup.sh</span> <span class="err">&gt;</span> <span class="err">/home/www/script/redmine_database_backup.log</span>
+</code></pre></div></div>
 
 <p>再重启cron服务即可。</p>
 
@@ -557,8 +535,8 @@ crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进
             <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-07-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
-        <span class="footer__copyright">本站由 <a href="http://webbleen.com">@webbleen</a> 创建，采用 <a href="https://github.com/webbleen/wno-jekyll">Wno - Jekyll</a> 作为主题 - &copy; 2018</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2019-06-22 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">本站由 <a href="http://webbleen.com">@webbleen</a> 创建，采用 <a href="https://github.com/webbleen/wno-jekyll">Wno - Jekyll</a> 作为主题 - &copy; 2019</span>
     </footer>
 </section>
 
