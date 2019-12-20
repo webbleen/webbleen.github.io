@@ -5,8 +5,8 @@
     <description>空间有形，梦想无限。</description>
     <link>http://webbleen.com/</link>
     <atom:link href="http://webbleen.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Jun 2019 14:37:31 +0900</pubDate>
-    <lastBuildDate>Sat, 22 Jun 2019 14:37:31 +0900</lastBuildDate>
+    <pubDate>Sat, 21 Dec 2019 01:28:14 +0900</pubDate>
+    <lastBuildDate>Sat, 21 Dec 2019 01:28:14 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -372,6 +372,288 @@ crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进
         
         <category>操作文档集</category>
         
+        
+      </item>
+    
+      <item>
+        <title>编译各平台使用的库-以编译tolua为例</title>
+        <description>&lt;p&gt;#tolua_runtime
+&lt;strong&gt;Build&lt;/strong&gt;&lt;br /&gt;
+pc: &lt;code class=&quot;highlighter-rouge&quot;&gt;build_win32.sh&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;build_win64.h&lt;/code&gt;  (mingw + luajit2.0.4) &lt;br /&gt;
+android: &lt;code class=&quot;highlighter-rouge&quot;&gt;build_arm.sh&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;build_x86.sh&lt;/code&gt; (mingw + luajit2.0.4) &lt;br /&gt;
+mac: &lt;code class=&quot;highlighter-rouge&quot;&gt;build_osx.sh&lt;/code&gt; (xcode + luac5.1.5 luajit can’t run in unity5) &lt;br /&gt;
+ios: &lt;code class=&quot;highlighter-rouge&quot;&gt;build_ios.sh&lt;/code&gt; (xcode + luajit2.1 beta)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;NDK 版本:android-ndk-r10e&lt;br /&gt;
+Windows默认安装到 D:/android-ndk-r10e&lt;br /&gt;
+Mac默认安装到 /usr/local/android-ndk-r10e&lt;br /&gt;
+https://dl.google.com/android/repository/android-ndk-r10e-windows-x86_64.zip&lt;br /&gt;
+Msys2配置说明&lt;br /&gt;
+https://github.com/topameng/tolua_runtime/wiki&lt;br /&gt;
+配置好的Msys2下载&lt;br /&gt;
+https://pan.baidu.com/s/1c2JzvDQ&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;#Libs
+&lt;strong&gt;cjson&lt;/strong&gt;&lt;br /&gt;
+https://github.com/mpx/lua-cjson&lt;br /&gt;
+&lt;strong&gt;protoc-gen-lua&lt;/strong&gt;&lt;br /&gt;
+https://github.com/topameng/protoc-gen-lua&lt;br /&gt;
+&lt;strong&gt;LuaSocket&lt;/strong&gt; &lt;br /&gt;
+https://github.com/diegonehab/luasocket&lt;br /&gt;
+&lt;strong&gt;struct&lt;/strong&gt;&lt;br /&gt;
+http://www.inf.puc-rio.br/~roberto/struct/&lt;br /&gt;
+&lt;strong&gt;lpeg&lt;/strong&gt;&lt;br /&gt;
+http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  做U3D手机游戏，最热门的技术组合是c#+lua，使用lua是因为可以热更新而将c#和lua粘合起来的框架，目前最热门的是&lt;a href=&quot;https://github.com/topameng/tolua&quot;&gt;tolua框架&lt;/a&gt;，tolua框架有两部分组成，一个是c#部分，一个是c部分，整个框架在游戏代码中的位置是这样子的。如下图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017/unity3d_tolua_struct.png&quot; alt=&quot;unity3d_tolua_struct&quot; /&gt;
+&lt;br /&gt;  tolua C 起到承上启下的作用，是C#和lua的中间层，在和C#交互方面，作为非c#托管代码,会提供一些函数让c# DllImport，c#会通过Marshal等与非托管代码交互；在和lua交互方面，它符合lua扩展库标准，一方面通过lua的C API与lua虚拟机交互，另一方面会提供接口给lua脚本使用。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  还有一些lua的扩展库，比如cjson、LuaSocket、sqlite3、lpeg、bit、pbc等手机游戏常用库，这些库扩展了lua的能力，本文要介绍的就是将这些第三方扩展库和lua源码(图中红色部分)一起编译成tolua的native库，windows平台叫做tolua.dll，android叫做libtolua.so，mac平台叫tolua.bundle，而iOS平台由于不允许使用动态库，所以会编译成静态库libtolua.a。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  首先，先从&lt;a href=&quot;https://github.com/topameng/tolua_runtime&quot;&gt;tolua_runtime的github&lt;/a&gt;获取tolua.c开发包,在windows平台编译，用vs可以编译但是我没试过，我是使用mingw来编译的，需要准备的工具：msys2(这个才可以编译x86_64)。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  安装&lt;a href=&quot;http://www.msys2.org/&quot;&gt;MSYS2&lt;/a&gt;，关于如何在msys2安装gcc和make可以参考tolua_runtime/wiki，安装msys2和下载好gcc和make软件包后(可能链接时会报找不到libintl-8.dll的错，顺便也安装一下mingw-w64-x86_64-gettext这个软件包，pacman -S mingw-w64-x86_64-gettext)，编译win32位程序要用mingw32.exe和编译win64位要用mingw64.exe。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  来到下载好的tolua_runtime目录。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;执行脚本&lt;code class=&quot;highlighter-rouge&quot;&gt;build_win_32.sh&lt;/code&gt;，这就编译好了windows平台下x86动态库。&lt;/li&gt;
+  &lt;li&gt;执行脚本&lt;code class=&quot;highlighter-rouge&quot;&gt;build_win_64.sh&lt;/code&gt;，这就编译好了windows平台下x86_64动态库。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;  脚本主要是执行make和gcc，如过自己有一些特殊的扩展库要编译，自行修改一下脚本添加就好，我在tolua_runtime下载下来的脚本中添加了pbc和lsqlite3的编译，下面是&lt;code class=&quot;highlighter-rouge&quot;&gt;build_win64.sh&lt;/code&gt;的内容；&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 62 Bit Version&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; window/x86_64
+
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;luajit
+mingw32-make clean
+mingw32-make &lt;span class=&quot;nv&quot;&gt;BUILDMODE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;static &lt;span class=&quot;nv&quot;&gt;CC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gcc -m64 -O3&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;src/libluajit.a ../window/x86_64/libluajit.a
+mingw32-make clean
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..
+
+gcc &lt;span class=&quot;nt&quot;&gt;-m64&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-shared&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+tolua.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+int64.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+uint64.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+pb.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+pbc-lua.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+lsqlite3.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+lpeg.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+struct.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+cjson/strbuf.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+cjson/lua_cjson.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+cjson/fpconv.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+lsqlite3/shell.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+lsqlite3/sqlite3.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/auxiliar.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/buffer.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/except.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/inet.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/io.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/luasocket.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/mime.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/options.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/select.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/tcp.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/timeout.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/udp.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/wsocket.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+luasocket/compat.c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; Plugins/x86_64/tolua.dll &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;./ &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-Iluajit&lt;/span&gt;/src &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-Icjson&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-Iluasocket&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-Ipbc&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-Ilsqlite3&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-lws2_32&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,--whole-archive window/x86_64/libluajit.a window/x86_64/libpbc.a &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,--no-whole-archive &lt;span class=&quot;nt&quot;&gt;-static-libgcc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-static-libstdc&lt;/span&gt;++
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;在ming64.exe打开的终端中进行编译。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017/mingw64_build.png&quot; alt=&quot;mingw64_build&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;将编译好的tolua.dll拷贝到unity的Plugins下对应平台目录下就可以使用。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  接下来编译android平台的动态库，android平台用得最多的cpu架构体系是Acorn公司的arm和Intel公司x86，由于arm市场占有率最高，大多android的app也就只编译了arm版本，所以Intel也专门针对arm体系架构做了一个转换程序，也就是说，arm程序在x86机子上也可以跑起来。所以，一般来说，只要编译arm就可以了（最常用的CPU和ABI是ARMv7a），当然，将x86也编译起来是极好的，据以往分析闪退的经验，在x86机子上闪退的一大元凶就是那个转换程序出了问题，代价就是会增加包体的大小(每多支持一个CPU架构，就是多编译一个动态库so)。
+  先来看一看这个编译脚本&lt;code class=&quot;highlighter-rouge&quot;&gt;build_arm.sh&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;luajit/src
+&lt;span class=&quot;c&quot;&gt;# Android/ARM, armeabi-v7a (ARMv7 VFP), Android 4.0+ (ICS)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;NDK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local/android-ndk-r10e
+&lt;span class=&quot;nv&quot;&gt;NDKABI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;21
+&lt;span class=&quot;nv&quot;&gt;NDKVER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDK&lt;/span&gt;/toolchains/arm-linux-androideabi-4.9
+&lt;span class=&quot;nv&quot;&gt;NDKP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDKVER&lt;/span&gt;/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
+&lt;span class=&quot;nv&quot;&gt;NDKF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--sysroot &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDK&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/platforms/android-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDKABI&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/arch-arm&quot;&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;NDKARCH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-march=armv7-a -mfloat-abi=softfp -Wl,--fix-cortex-a8&quot;&lt;/span&gt;
+
+make clean
+make &lt;span class=&quot;nv&quot;&gt;HOST_CC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gcc -O2 -m32&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CROSS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDKP&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET_SYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Linux &lt;span class=&quot;nv&quot;&gt;TARGET_FLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDKF&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NDKARCH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; ./libluajit.a ../../android/jni/libluajit.a
+make clean
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ../../android
+ndk-build clean &lt;span class=&quot;nv&quot;&gt;APP_ABI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;armeabi-v7a,x86&quot;&lt;/span&gt;
+ndk-build &lt;span class=&quot;nv&quot;&gt;APP_ABI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;armeabi-v7a&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;libs/armeabi-v7a/libtolua.so ../Plugins/Android/libs/armeabi-v7a/
+ndk-build clean &lt;span class=&quot;nv&quot;&gt;APP_ABI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;armeabi-v7a,x86&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;  这个脚本主要分三部分，第一部分定义变量；第二部分编译luajit的arm版，生成luajit.a；第三部分用ndk的ndk-build程序最终编译出libtolua.so，ndk-build其实也是封装了make调用最终调用gcc进行交叉编译的。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  luajit的Makefile支持多平台编译，所以通过设置参数直接调用gcc进行编译，（luajit在编译过程中间还会生成一些中间代码，所以还是建议用官方提供的Makefile来编译），但并不是所有c库都有支持多平台Makefile，所以最方便也最保险的方法是通过ndk-build工具和填写Android.mk来编译，就像第三部分那样。看一下&lt;code class=&quot;highlighter-rouge&quot;&gt;Android.mk&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-MK&quot;&gt;LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libluajit
+LOCAL_SRC_FILES := libluajit.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_FORCE_STATIC_EXECUTABLE := true
+LOCAL_MODULE := tolua
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../luajit/src
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../pbc/src
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../
+
+LOCAL_CPPFLAGS := -O2
+LOCAL_CFLAGS :=  -O2 -std=gnu99
+
+LOCAL_SRC_FILES :=	../../tolua.c \
+                    ../../int64.c \
+                    ../../uint64.c \
+                    ../../pb.c \
+                    ../../lpeg.c \
+                    ../../struct.c \
+                    ../../cjson/strbuf.c \
+                    ../../cjson/lua_cjson.c \
+                    ../../cjson/fpconv.c \
+                    ../../luasocket/auxiliar.c \
+                    ../../luasocket/buffer.c \
+                    ../../luasocket/except.c \
+                    ../../luasocket/inet.c \
+                    ../../luasocket/io.c \
+                    ../../luasocket/luasocket.c \
+                    ../../luasocket/mime.c \
+                    ../../luasocket/options.c \
+                    ../../luasocket/select.c \
+                    ../../luasocket/tcp.c \
+                    ../../luasocket/timeout.c \
+                    ../../luasocket/udp.c \
+                    ../../luasocket/usocket.c \
+                    ../../luasocket/compat.c \
+                    ../../pbc/src/alloc.c\
+                    ../../pbc/src/array.c\
+                    ../../pbc/src/bootstrap.c\
+                    ../../pbc/src/context.c\
+                    ../../pbc/src/decode.c\
+                    ../../pbc/src/map.c\
+                    ../../pbc/src/pattern.c\
+                    ../../pbc/src/proto.c\
+                    ../../pbc/src/register.c\
+                    ../../pbc/src/rmessage.c\
+                    ../../pbc/src/stringpool.c\
+                    ../../pbc/src/varint.c\
+                    ../../pbc/src/wmessage.c\
+                    ../../pbc/src/pbc-lua.c\
+
+LOCAL_WHOLE_STATIC_LIBRARIES += libluajit
+include $(BUILD_SHARED_LIBRARY)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br /&gt;  下载好Android-ndk工具包，然后修改一下编译脚本中的ndk路径,将ndk路径添加到环境变量PATH中，执行脚本。下面是脚本执行过程中输出的最后几行信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-echo&quot;&gt;    [armeabi-v7a] Compile thumb  : tolua &amp;lt;= stringpool.c
+    [armeabi-v7a] Compile thumb  : tolua &amp;lt;= varint.c
+    [armeabi-v7a] Compile thumb  : tolua &amp;lt;= wmessage.c
+    [armeabi-v7a] SharedLibrary  : libtolua.so
+    [armeabi-v7a] Install        : libtolua.so =&amp;gt; libs/armeabi-v7a/libtolua.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最终会生成对应CPU架构和ABI的so文件。&lt;/p&gt;
+
+&lt;p&gt;解决了windows平台和android平台，下面来看看apple的mac和iOS平台。
+在mac平台可以用xcode进行编译，看一下&lt;code class=&quot;highlighter-rouge&quot;&gt;build_osx.sh&lt;/code&gt;的内容。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;macnojit/
+xcodebuild clean
+xcodebuild &lt;span class=&quot;nt&quot;&gt;-configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Release
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; build/Release/tolua.bundle ../Plugins/#!/usr/bin/env bash
+
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;macnojit/
+xcodebuild clean
+xcodebuild &lt;span class=&quot;nt&quot;&gt;-configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Release
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; build/Release/tolua.bundle ../Plugins/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;  打开xcode工程，将需要的源文件拖进去就好，在xcode工程目录中执行脚本就行。
+&lt;img src=&quot;/assets/images/2017/tolua_xcode_build.png&quot; alt=&quot;tolua_xcode_build&quot; /&gt;
+这样就编译出在mac平台使用的tolua.bundle了。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;  最后是，iOS平台，研究一下脚本 &lt;code class=&quot;highlighter-rouge&quot;&gt;build_ios.sh&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dirname&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;BASH_SOURCE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[0]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LIPO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;xcrun -sdk iphoneos lipo&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;STRIP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;xcrun -sdk iphoneos strip&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;SRCDIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DIR&lt;/span&gt;/luajit-2.1/
+&lt;span class=&quot;nv&quot;&gt;DESTDIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DIR&lt;/span&gt;/iOS
+&lt;span class=&quot;nv&quot;&gt;IXCODE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;xcode-select &lt;span class=&quot;nt&quot;&gt;-print-path&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ISDK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$IXCODE&lt;/span&gt;/Platforms/iPhoneOS.platform/Developer
+&lt;span class=&quot;nv&quot;&gt;ISDKD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/
+&lt;span class=&quot;nv&quot;&gt;ISDKVER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;iPhoneOS.sdk
+&lt;span class=&quot;nv&quot;&gt;ISDKP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$IXCODE&lt;/span&gt;/usr/bin/
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;/ar &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then 
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ISDKD&lt;/span&gt;/usr/bin/ar &lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi
+
+if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;/ranlib &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ISDKD&lt;/span&gt;/usr/bin/ranlib &lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi
+
+if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;/strip &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ISDKD&lt;/span&gt;/usr/bin/strip &lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi
+
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.a
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SRCDIR&lt;/span&gt;
+
+make clean
+&lt;span class=&quot;nv&quot;&gt;ISDKF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-arch armv7 -isysroot &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDK&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/SDKs/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKVER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+make &lt;span class=&quot;nv&quot;&gt;HOST_CC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gcc -m32&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CROSS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET_FLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKF&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;armv7 &lt;span class=&quot;nv&quot;&gt;TARGET_SYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;iOS
+&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SRCDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/src/libluajit.a &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/libluajit-armv7.a
+
+make clean
+&lt;span class=&quot;nv&quot;&gt;ISDKF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-arch armv7s -isysroot &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDK&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/SDKs/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKVER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+make &lt;span class=&quot;nv&quot;&gt;HOST_CC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gcc -m32&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CROSS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET_FLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKF&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;armv7s &lt;span class=&quot;nv&quot;&gt;TARGET_SYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;iOS
+&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SRCDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/src/libluajit.a &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/libluajit-armv7s.a
+
+make clean
+&lt;span class=&quot;nv&quot;&gt;ISDKF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-arch arm64 -isysroot &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDK&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/SDKs/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKVER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+make &lt;span class=&quot;nv&quot;&gt;HOST_CC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gcc &quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CROSS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKP&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET_FLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ISDKF&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TARGET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;arm64 &lt;span class=&quot;nv&quot;&gt;TARGET_SYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;iOS
+&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SRCDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/src/libluajit.a &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/libluajit-arm64.a
+make clean
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ../iOS
+&lt;span class=&quot;nv&quot;&gt;$LIPO&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-create&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/libluajit-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.a &lt;span class=&quot;nt&quot;&gt;-output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/libluajit.a
+&lt;span class=&quot;nv&quot;&gt;$STRIP&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESTDIR&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/libluajit.a
+xcodebuild clean
+xcodebuild &lt;span class=&quot;nt&quot;&gt;-configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Release
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; ./build/Release-iphoneos/libtolua.a ../Plugins/iOS/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;  iphone用的也是arm架构，这也属于交叉编译，脚本分三部分，第一部分定义变量，第二部分交叉编译luajit，这里分别编译armv7、armv7s、arm64，然后把他们合并在一起，以便支持不同配置的iOS设备，最后是与编译mac平台时一样，执行xcode编译。
+  至此，开发手机游戏主要的各个平台的编译native代码的方法就介绍完了。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 01 Apr 2017 20:51:30 +0900</pubDate>
+        <link>http://webbleen.com/2017/04/%E7%BC%96%E8%AF%91%E5%90%84%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%BA%93-%E4%BB%A5%E7%BC%96%E8%AF%91tolua%E4%B8%BA%E4%BE%8B/</link>
+        <guid isPermaLink="true">http://webbleen.com/2017/04/%E7%BC%96%E8%AF%91%E5%90%84%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%BA%93-%E4%BB%A5%E7%BC%96%E8%AF%91tolua%E4%B8%BA%E4%BE%8B/</guid>
+        
+        <category>Unity3D</category>
+        
+        
+        <category>Unity3D</category>
         
       </item>
     

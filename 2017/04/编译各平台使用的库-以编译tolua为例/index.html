@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>编译各平台使用的库-以编译tolua为例</title>
+  <meta name="description" content="#tolua_runtimeBuildpc: build_win32.sh build_win64.h  (mingw + luajit2.0.4) android: build_arm.sh build_x86.sh (mingw + luajit2.0.4) mac: build_osx.sh (xcode ...">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="编译各平台使用的库-以编译tolua为例">
+  <meta name="twitter:description" content="#tolua_runtimeBuildpc: build_win32.sh build_win64.h  (mingw + luajit2.0.4) android: build_arm.sh build_x86.sh (mingw + luajit2.0.4) mac: build_osx.sh (xcode ...">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="编译各平台使用的库-以编译tolua为例">
+  <meta property="og:description" content="#tolua_runtimeBuildpc: build_win32.sh build_win64.h  (mingw + luajit2.0.4) android: build_arm.sh build_x86.sh (mingw + luajit2.0.4) mac: build_osx.sh (xcode ...">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.ico" />
+  <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/ico">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://webbleen.com/2017/04/%E7%BC%96%E8%AF%91%E5%90%84%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%BA%93-%E4%BB%A5%E7%BC%96%E8%AF%91tolua%E4%B8%BA%E4%BE%8B/">
+  <link rel="alternate" type="application/rss+xml" title="webbleen" href="http://webbleen.com/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 webbleen 的主页" class="blog-button"><img src="/assets/images/avatar.png" width="80" alt="webbleen logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for webbleen" class="blog-button">webbleen</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">空间有形，梦想无限。</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description">嗨，我是李文斌。</p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+                
+                  <li class="navigation__item"><a href="http://resume.webbleen.com" target="_blank" title="我的简历">简历</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/togopaul" title="@togopaul 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/webbleen" title="@webbleen 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:webbleen@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-red"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2017-04-01 20:51:30 +0900" itemprop="datePublished" class="post-meta__date date">2017-04-01</time> &#8226; <span class="post-meta__tags tags">Unity3D</span>
+    </div>
+    <h1 class="post-title">编译各平台使用的库-以编译tolua为例</h1>
+  </header>
+
+  <section class="post">
+    <p>#tolua_runtime
+<strong>Build</strong><br />
+pc: <code class="highlighter-rouge">build_win32.sh</code> <code class="highlighter-rouge">build_win64.h</code>  (mingw + luajit2.0.4) <br />
+android: <code class="highlighter-rouge">build_arm.sh</code> <code class="highlighter-rouge">build_x86.sh</code> (mingw + luajit2.0.4) <br />
+mac: <code class="highlighter-rouge">build_osx.sh</code> (xcode + luac5.1.5 luajit can’t run in unity5) <br />
+ios: <code class="highlighter-rouge">build_ios.sh</code> (xcode + luajit2.1 beta)</p>
+
+<p><br />NDK 版本:android-ndk-r10e<br />
+Windows默认安装到 D:/android-ndk-r10e<br />
+Mac默认安装到 /usr/local/android-ndk-r10e<br />
+https://dl.google.com/android/repository/android-ndk-r10e-windows-x86_64.zip<br />
+Msys2配置说明<br />
+https://github.com/topameng/tolua_runtime/wiki<br />
+配置好的Msys2下载<br />
+https://pan.baidu.com/s/1c2JzvDQ<br /></p>
+
+<p>#Libs
+<strong>cjson</strong><br />
+https://github.com/mpx/lua-cjson<br />
+<strong>protoc-gen-lua</strong><br />
+https://github.com/topameng/protoc-gen-lua<br />
+<strong>LuaSocket</strong> <br />
+https://github.com/diegonehab/luasocket<br />
+<strong>struct</strong><br />
+http://www.inf.puc-rio.br/~roberto/struct/<br />
+<strong>lpeg</strong><br />
+http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html</p>
+
+<p><br />  做U3D手机游戏，最热门的技术组合是c#+lua，使用lua是因为可以热更新而将c#和lua粘合起来的框架，目前最热门的是<a href="https://github.com/topameng/tolua">tolua框架</a>，tolua框架有两部分组成，一个是c#部分，一个是c部分，整个框架在游戏代码中的位置是这样子的。如下图所示：</p>
+
+<p><img src="/assets/images/2017/unity3d_tolua_struct.png" alt="unity3d_tolua_struct" />
+<br />  tolua C 起到承上启下的作用，是C#和lua的中间层，在和C#交互方面，作为非c#托管代码,会提供一些函数让c# DllImport，c#会通过Marshal等与非托管代码交互；在和lua交互方面，它符合lua扩展库标准，一方面通过lua的C API与lua虚拟机交互，另一方面会提供接口给lua脚本使用。</p>
+
+<p><br />  还有一些lua的扩展库，比如cjson、LuaSocket、sqlite3、lpeg、bit、pbc等手机游戏常用库，这些库扩展了lua的能力，本文要介绍的就是将这些第三方扩展库和lua源码(图中红色部分)一起编译成tolua的native库，windows平台叫做tolua.dll，android叫做libtolua.so，mac平台叫tolua.bundle，而iOS平台由于不允许使用动态库，所以会编译成静态库libtolua.a。</p>
+
+<p><br />  首先，先从<a href="https://github.com/topameng/tolua_runtime">tolua_runtime的github</a>获取tolua.c开发包,在windows平台编译，用vs可以编译但是我没试过，我是使用mingw来编译的，需要准备的工具：msys2(这个才可以编译x86_64)。</p>
+
+<p><br />  安装<a href="http://www.msys2.org/">MSYS2</a>，关于如何在msys2安装gcc和make可以参考tolua_runtime/wiki，安装msys2和下载好gcc和make软件包后(可能链接时会报找不到libintl-8.dll的错，顺便也安装一下mingw-w64-x86_64-gettext这个软件包，pacman -S mingw-w64-x86_64-gettext)，编译win32位程序要用mingw32.exe和编译win64位要用mingw64.exe。</p>
+
+<p><br />  来到下载好的tolua_runtime目录。</p>
+
+<ul>
+  <li>执行脚本<code class="highlighter-rouge">build_win_32.sh</code>，这就编译好了windows平台下x86动态库。</li>
+  <li>执行脚本<code class="highlighter-rouge">build_win_64.sh</code>，这就编译好了windows平台下x86_64动态库。</li>
+</ul>
+
+<p><br />  脚本主要是执行make和gcc，如过自己有一些特殊的扩展库要编译，自行修改一下脚本添加就好，我在tolua_runtime下载下来的脚本中添加了pbc和lsqlite3的编译，下面是<code class="highlighter-rouge">build_win64.sh</code>的内容；</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># 62 Bit Version</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> window/x86_64
+
+<span class="nb">cd </span>luajit
+mingw32-make clean
+mingw32-make <span class="nv">BUILDMODE</span><span class="o">=</span>static <span class="nv">CC</span><span class="o">=</span><span class="s2">"gcc -m64 -O3"</span>
+<span class="nb">cp </span>src/libluajit.a ../window/x86_64/libluajit.a
+mingw32-make clean
+
+<span class="nb">cd</span> ..
+
+gcc <span class="nt">-m64</span> <span class="nt">-O3</span> <span class="nt">-std</span><span class="o">=</span>gnu99 <span class="nt">-shared</span> <span class="se">\</span>
+tolua.c <span class="se">\</span>
+int64.c <span class="se">\</span>
+uint64.c <span class="se">\</span>
+pb.c <span class="se">\</span>
+pbc-lua.c <span class="se">\</span>
+lsqlite3.c <span class="se">\</span>
+lpeg.c <span class="se">\</span>
+struct.c <span class="se">\</span>
+cjson/strbuf.c <span class="se">\</span>
+cjson/lua_cjson.c <span class="se">\</span>
+cjson/fpconv.c <span class="se">\</span>
+lsqlite3/shell.c <span class="se">\</span>
+lsqlite3/sqlite3.c <span class="se">\</span>
+luasocket/auxiliar.c <span class="se">\</span>
+luasocket/buffer.c <span class="se">\</span>
+luasocket/except.c <span class="se">\</span>
+luasocket/inet.c <span class="se">\</span>
+luasocket/io.c <span class="se">\</span>
+luasocket/luasocket.c <span class="se">\</span>
+luasocket/mime.c <span class="se">\</span>
+luasocket/options.c <span class="se">\</span>
+luasocket/select.c <span class="se">\</span>
+luasocket/tcp.c <span class="se">\</span>
+luasocket/timeout.c <span class="se">\</span>
+luasocket/udp.c <span class="se">\</span>
+luasocket/wsocket.c <span class="se">\</span>
+luasocket/compat.c <span class="se">\</span>
+<span class="nt">-o</span> Plugins/x86_64/tolua.dll <span class="se">\</span>
+<span class="nt">-I</span>./ <span class="se">\</span>
+<span class="nt">-Iluajit</span>/src <span class="se">\</span>
+<span class="nt">-Icjson</span> <span class="se">\</span>
+<span class="nt">-Iluasocket</span> <span class="se">\</span>
+<span class="nt">-Ipbc</span> <span class="se">\</span>
+<span class="nt">-Ilsqlite3</span> <span class="se">\</span>
+<span class="nt">-lws2_32</span> <span class="se">\</span>
+<span class="nt">-Wl</span>,--whole-archive window/x86_64/libluajit.a window/x86_64/libpbc.a <span class="nt">-Wl</span>,--no-whole-archive <span class="nt">-static-libgcc</span> <span class="nt">-static-libstdc</span>++
+</code></pre></div></div>
+<p><br />在ming64.exe打开的终端中进行编译。</p>
+
+<p><img src="/assets/images/2017/mingw64_build.png" alt="mingw64_build" /></p>
+
+<p>将编译好的tolua.dll拷贝到unity的Plugins下对应平台目录下就可以使用。</p>
+
+<p><br />  接下来编译android平台的动态库，android平台用得最多的cpu架构体系是Acorn公司的arm和Intel公司x86，由于arm市场占有率最高，大多android的app也就只编译了arm版本，所以Intel也专门针对arm体系架构做了一个转换程序，也就是说，arm程序在x86机子上也可以跑起来。所以，一般来说，只要编译arm就可以了（最常用的CPU和ABI是ARMv7a），当然，将x86也编译起来是极好的，据以往分析闪退的经验，在x86机子上闪退的一大元凶就是那个转换程序出了问题，代价就是会增加包体的大小(每多支持一个CPU架构，就是多编译一个动态库so)。
+  先来看一看这个编译脚本<code class="highlighter-rouge">build_arm.sh</code>。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>luajit/src
+<span class="c"># Android/ARM, armeabi-v7a (ARMv7 VFP), Android 4.0+ (ICS)</span>
+<span class="nv">NDK</span><span class="o">=</span>/usr/local/android-ndk-r10e
+<span class="nv">NDKABI</span><span class="o">=</span>21
+<span class="nv">NDKVER</span><span class="o">=</span><span class="nv">$NDK</span>/toolchains/arm-linux-androideabi-4.9
+<span class="nv">NDKP</span><span class="o">=</span><span class="nv">$NDKVER</span>/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
+<span class="nv">NDKF</span><span class="o">=</span><span class="s2">"--sysroot </span><span class="nv">$NDK</span><span class="s2">/platforms/android-</span><span class="nv">$NDKABI</span><span class="s2">/arch-arm"</span> 
+<span class="nv">NDKARCH</span><span class="o">=</span><span class="s2">"-march=armv7-a -mfloat-abi=softfp -Wl,--fix-cortex-a8"</span>
+
+make clean
+make <span class="nv">HOST_CC</span><span class="o">=</span><span class="s2">"gcc -O2 -m32"</span> <span class="nv">CROSS</span><span class="o">=</span><span class="nv">$NDKP</span> <span class="nv">TARGET_SYS</span><span class="o">=</span>Linux <span class="nv">TARGET_FLAGS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$NDKF</span><span class="s2"> </span><span class="nv">$NDKARCH</span><span class="s2">"</span>
+<span class="nb">cp</span> ./libluajit.a ../../android/jni/libluajit.a
+make clean
+
+<span class="nb">cd</span> ../../android
+ndk-build clean <span class="nv">APP_ABI</span><span class="o">=</span><span class="s2">"armeabi-v7a,x86"</span>
+ndk-build <span class="nv">APP_ABI</span><span class="o">=</span><span class="s2">"armeabi-v7a"</span>
+<span class="nb">cp </span>libs/armeabi-v7a/libtolua.so ../Plugins/Android/libs/armeabi-v7a/
+ndk-build clean <span class="nv">APP_ABI</span><span class="o">=</span><span class="s2">"armeabi-v7a,x86"</span>
+</code></pre></div></div>
+<p><br />  这个脚本主要分三部分，第一部分定义变量；第二部分编译luajit的arm版，生成luajit.a；第三部分用ndk的ndk-build程序最终编译出libtolua.so，ndk-build其实也是封装了make调用最终调用gcc进行交叉编译的。</p>
+
+<p><br />  luajit的Makefile支持多平台编译，所以通过设置参数直接调用gcc进行编译，（luajit在编译过程中间还会生成一些中间代码，所以还是建议用官方提供的Makefile来编译），但并不是所有c库都有支持多平台Makefile，所以最方便也最保险的方法是通过ndk-build工具和填写Android.mk来编译，就像第三部分那样。看一下<code class="highlighter-rouge">Android.mk</code>：</p>
+
+<pre><code class="language-MK">LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libluajit
+LOCAL_SRC_FILES := libluajit.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_FORCE_STATIC_EXECUTABLE := true
+LOCAL_MODULE := tolua
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../luajit/src
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../pbc/src
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../
+
+LOCAL_CPPFLAGS := -O2
+LOCAL_CFLAGS :=  -O2 -std=gnu99
+
+LOCAL_SRC_FILES :=	../../tolua.c \
+                    ../../int64.c \
+                    ../../uint64.c \
+                    ../../pb.c \
+                    ../../lpeg.c \
+                    ../../struct.c \
+                    ../../cjson/strbuf.c \
+                    ../../cjson/lua_cjson.c \
+                    ../../cjson/fpconv.c \
+                    ../../luasocket/auxiliar.c \
+                    ../../luasocket/buffer.c \
+                    ../../luasocket/except.c \
+                    ../../luasocket/inet.c \
+                    ../../luasocket/io.c \
+                    ../../luasocket/luasocket.c \
+                    ../../luasocket/mime.c \
+                    ../../luasocket/options.c \
+                    ../../luasocket/select.c \
+                    ../../luasocket/tcp.c \
+                    ../../luasocket/timeout.c \
+                    ../../luasocket/udp.c \
+                    ../../luasocket/usocket.c \
+                    ../../luasocket/compat.c \
+                    ../../pbc/src/alloc.c\
+                    ../../pbc/src/array.c\
+                    ../../pbc/src/bootstrap.c\
+                    ../../pbc/src/context.c\
+                    ../../pbc/src/decode.c\
+                    ../../pbc/src/map.c\
+                    ../../pbc/src/pattern.c\
+                    ../../pbc/src/proto.c\
+                    ../../pbc/src/register.c\
+                    ../../pbc/src/rmessage.c\
+                    ../../pbc/src/stringpool.c\
+                    ../../pbc/src/varint.c\
+                    ../../pbc/src/wmessage.c\
+                    ../../pbc/src/pbc-lua.c\
+
+LOCAL_WHOLE_STATIC_LIBRARIES += libluajit
+include $(BUILD_SHARED_LIBRARY)
+</code></pre>
+<p><br />  下载好Android-ndk工具包，然后修改一下编译脚本中的ndk路径,将ndk路径添加到环境变量PATH中，执行脚本。下面是脚本执行过程中输出的最后几行信息：</p>
+<pre><code class="language-echo">    [armeabi-v7a] Compile thumb  : tolua &lt;= stringpool.c
+    [armeabi-v7a] Compile thumb  : tolua &lt;= varint.c
+    [armeabi-v7a] Compile thumb  : tolua &lt;= wmessage.c
+    [armeabi-v7a] SharedLibrary  : libtolua.so
+    [armeabi-v7a] Install        : libtolua.so =&gt; libs/armeabi-v7a/libtolua.so
+</code></pre>
+<p>最终会生成对应CPU架构和ABI的so文件。</p>
+
+<p>解决了windows平台和android平台，下面来看看apple的mac和iOS平台。
+在mac平台可以用xcode进行编译，看一下<code class="highlighter-rouge">build_osx.sh</code>的内容。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+<span class="nb">cd </span>macnojit/
+xcodebuild clean
+xcodebuild <span class="nt">-configuration</span><span class="o">=</span>Release
+<span class="nb">cp</span> <span class="nt">-r</span> build/Release/tolua.bundle ../Plugins/#!/usr/bin/env bash
+
+<span class="nb">cd </span>macnojit/
+xcodebuild clean
+xcodebuild <span class="nt">-configuration</span><span class="o">=</span>Release
+<span class="nb">cp</span> <span class="nt">-r</span> build/Release/tolua.bundle ../Plugins/
+</code></pre></div></div>
+<p><br />  打开xcode工程，将需要的源文件拖进去就好，在xcode工程目录中执行脚本就行。
+<img src="/assets/images/2017/tolua_xcode_build.png" alt="tolua_xcode_build" />
+这样就编译出在mac平台使用的tolua.bundle了。</p>
+
+<p><br />  最后是，iOS平台，研究一下脚本 <code class="highlighter-rouge">build_ios.sh</code>。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+<span class="nv">DIR</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span> <span class="nb">cd</span> <span class="s2">"</span><span class="k">$(</span> <span class="nb">dirname</span> <span class="s2">"</span><span class="k">${</span><span class="nv">BASH_SOURCE</span><span class="p">[0]</span><span class="k">}</span><span class="s2">"</span> <span class="k">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> <span class="nb">pwd</span> <span class="k">)</span><span class="s2">"</span>
+<span class="nv">LIPO</span><span class="o">=</span><span class="s2">"xcrun -sdk iphoneos lipo"</span>
+<span class="nv">STRIP</span><span class="o">=</span><span class="s2">"xcrun -sdk iphoneos strip"</span>
+
+<span class="nv">SRCDIR</span><span class="o">=</span><span class="nv">$DIR</span>/luajit-2.1/
+<span class="nv">DESTDIR</span><span class="o">=</span><span class="nv">$DIR</span>/iOS
+<span class="nv">IXCODE</span><span class="o">=</span><span class="sb">`</span>xcode-select <span class="nt">-print-path</span><span class="sb">`</span>
+<span class="nv">ISDK</span><span class="o">=</span><span class="nv">$IXCODE</span>/Platforms/iPhoneOS.platform/Developer
+<span class="nv">ISDKD</span><span class="o">=</span>/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/
+<span class="nv">ISDKVER</span><span class="o">=</span>iPhoneOS.sdk
+<span class="nv">ISDKP</span><span class="o">=</span><span class="nv">$IXCODE</span>/usr/bin/
+
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-e</span> <span class="nv">$ISDKP</span>/ar <span class="o">]</span><span class="p">;</span> <span class="k">then 
+    </span><span class="nb">sudo cp</span> <span class="nv">$ISDKD</span>/usr/bin/ar <span class="nv">$ISDKP</span>
+<span class="k">fi
+
+if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-e</span> <span class="nv">$ISDKP</span>/ranlib <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">sudo cp</span> <span class="nv">$ISDKD</span>/usr/bin/ranlib <span class="nv">$ISDKP</span>
+<span class="k">fi
+
+if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-e</span> <span class="nv">$ISDKP</span>/strip <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">sudo cp</span> <span class="nv">$ISDKD</span>/usr/bin/strip <span class="nv">$ISDKP</span>
+<span class="k">fi
+
+</span><span class="nb">rm</span> <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/<span class="k">*</span>.a
+<span class="nb">cd</span> <span class="nv">$SRCDIR</span>
+
+make clean
+<span class="nv">ISDKF</span><span class="o">=</span><span class="s2">"-arch armv7 -isysroot </span><span class="nv">$ISDK</span><span class="s2">/SDKs/</span><span class="nv">$ISDKVER</span><span class="s2">"</span>
+make <span class="nv">HOST_CC</span><span class="o">=</span><span class="s2">"gcc -m32"</span> <span class="nv">CROSS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ISDKP</span><span class="s2">"</span> <span class="nv">TARGET_FLAGS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ISDKF</span><span class="s2">"</span> <span class="nv">TARGET</span><span class="o">=</span>armv7 <span class="nv">TARGET_SYS</span><span class="o">=</span>iOS
+<span class="nb">mv</span> <span class="s2">"</span><span class="nv">$SRCDIR</span><span class="s2">"</span>/src/libluajit.a <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/libluajit-armv7.a
+
+make clean
+<span class="nv">ISDKF</span><span class="o">=</span><span class="s2">"-arch armv7s -isysroot </span><span class="nv">$ISDK</span><span class="s2">/SDKs/</span><span class="nv">$ISDKVER</span><span class="s2">"</span>
+make <span class="nv">HOST_CC</span><span class="o">=</span><span class="s2">"gcc -m32"</span> <span class="nv">CROSS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ISDKP</span><span class="s2">"</span> <span class="nv">TARGET_FLAGS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ISDKF</span><span class="s2">"</span> <span class="nv">TARGET</span><span class="o">=</span>armv7s <span class="nv">TARGET_SYS</span><span class="o">=</span>iOS
+<span class="nb">mv</span> <span class="s2">"</span><span class="nv">$SRCDIR</span><span class="s2">"</span>/src/libluajit.a <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/libluajit-armv7s.a
+
+make clean
+<span class="nv">ISDKF</span><span class="o">=</span><span class="s2">"-arch arm64 -isysroot </span><span class="nv">$ISDK</span><span class="s2">/SDKs/</span><span class="nv">$ISDKVER</span><span class="s2">"</span>
+make <span class="nv">HOST_CC</span><span class="o">=</span><span class="s2">"gcc "</span> <span class="nv">CROSS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ISDKP</span><span class="s2">"</span> <span class="nv">TARGET_FLAGS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ISDKF</span><span class="s2">"</span> <span class="nv">TARGET</span><span class="o">=</span>arm64 <span class="nv">TARGET_SYS</span><span class="o">=</span>iOS
+<span class="nb">mv</span> <span class="s2">"</span><span class="nv">$SRCDIR</span><span class="s2">"</span>/src/libluajit.a <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/libluajit-arm64.a
+make clean
+
+<span class="nb">cd</span> ../iOS
+<span class="nv">$LIPO</span> <span class="nt">-create</span> <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/libluajit-<span class="k">*</span>.a <span class="nt">-output</span> <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/libluajit.a
+<span class="nv">$STRIP</span> <span class="nt">-S</span> <span class="s2">"</span><span class="nv">$DESTDIR</span><span class="s2">"</span>/libluajit.a
+xcodebuild clean
+xcodebuild <span class="nt">-configuration</span><span class="o">=</span>Release
+<span class="nb">cp</span> <span class="nt">-f</span> ./build/Release-iphoneos/libtolua.a ../Plugins/iOS/
+</code></pre></div></div>
+<p><br />  iphone用的也是arm架构，这也属于交叉编译，脚本分三部分，第一部分定义变量，第二部分交叉编译luajit，这里分别编译armv7、armv7s、arm64，然后把他们合并在一起，以便支持不同配置的iOS设备，最后是与编译mac平台时一样，执行xcode编译。
+  至此，开发手机游戏主要的各个平台的编译native代码的方法就介绍完了。</p>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/2018/06/centos6.x-install-redmine-3.1.1+nginx/" title="link to centos6.x 部署redmine-3.3.3+nginx">centos6.x 部署redmine-3.3.3+nginx</a></h2>
+       <p class="excerpt">安装前提条件centOs 6.x，详见：http://www.redmine.org/projects/redmine/wiki/RedmineInstall            Redmine version      Supported Ruby versions      Rails version used                  4.0 (upcoming)      ruby 2.2(2.2.2 and later), 2.3, 2.4      Rails 5.1...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2018-06-19 09:28:00 +0900" class="post-list__meta--date date">2018-06-19</time> &#8226; <span class="post-list__meta--tags tags">操作文档集</span><a class="btn-border-small" href=/2018/06/centos6.x-install-redmine-3.1.1+nginx/>继续阅读</a></div>
+   </div>
+   
+   
+   
+</section>
+
+<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://webbleen.com/2017/04/%E7%BC%96%E8%AF%91%E5%90%84%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%BA%93-%E4%BB%A5%E7%BC%96%E8%AF%91tolua%E4%B8%BA%E4%BE%8B/";
+        this.page.identifier = "/2017/04/%E7%BC%96%E8%AF%91%E5%90%84%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8%E7%9A%84%E5%BA%93-%E4%BB%A5%E7%BC%96%E8%AF%91tolua%E4%B8%BA%E4%BE%8B/";
+    };
+
+    var disqus_shortname = 'wno-jekyll';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2019-12-21 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">本站由 <a href="http://webbleen.com">@webbleen</a> 创建，采用 <a href="https://github.com/webbleen/wno-jekyll">Wno - Jekyll</a> 作为主题 - &copy; 2019</span>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+    
+  </body>
+
+</html>
