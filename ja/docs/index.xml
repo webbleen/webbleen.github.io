@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blowfish</title><link>https://webbleen.com/ja/docs/</link><description>Recent content on Blowfish</description><generator>Hugo -- gohugo.io</generator><language>ja</language><managingEditor>nuno@n9o.xyz (Blowfish)</managingEditor><webMaster>nuno@n9o.xyz (Blowfish)</webMaster><copyright>© 2025 Blowfish</copyright><lastBuildDate>Tue, 03 Jun 2025 17:44:34 +0900</lastBuildDate><atom:link href="https://webbleen.com/ja/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>初めてのポスト</title><link>https://webbleen.com/ja/docs/my-first-post/</link><pubDate>Tue, 03 Jun 2025 17:44:34 +0900</pubDate><author>nuno@n9o.xyz (Blowfish)</author><guid>https://webbleen.com/ja/docs/my-first-post/</guid><description>&lt;h2 class="relative group">Introduction
+&lt;div id="introduction" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#introduction" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>This is &lt;strong>bold&lt;/strong> text, and this is &lt;em>emphasized&lt;/em> text.&lt;/p>
+&lt;p>Visit the &lt;a href="https://webbleen.com" target="_blank">Webbleen&lt;/a> website!&lt;/p></description></item></channel></rss>
