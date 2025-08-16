@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>后端开发 on 冰灵志</title><link>https://me.flaretion.com/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</link><description>Recent content in 后端开发 on 冰灵志</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>webbleen@gmail.com (文先森)</managingEditor><webMaster>webbleen@gmail.com (文先森)</webMaster><copyright>© 2025 文先森</copyright><lastBuildDate>Mon, 27 Jan 2025 11:30:00 +0800</lastBuildDate><atom:link href="https://me.flaretion.com/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml"/><item><title>Node.js 性能优化实战指南</title><link>https://me.flaretion.com/docs/nodejs-performance-optimization/</link><pubDate>Mon, 27 Jan 2025 11:30:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/docs/nodejs-performance-optimization/</guid><description>&lt;h2 class="relative group">🚀 Node.js 性能优化核心策略
+&lt;div id="-nodejs-性能优化核心策略" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-nodejs-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%e6%a0%b8%e5%bf%83%e7%ad%96%e7%95%a5" aria-label="锚点">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>Node.js 作为高性能的 JavaScript 运行时，在正确的优化策略下可以达到惊人的性能表现。&lt;/p></description></item></channel></rss>

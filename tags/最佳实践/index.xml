@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>最佳实践 on 冰灵志</title><link>https://me.flaretion.com/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link><description>Recent content in 最佳实践 on 冰灵志</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>webbleen@gmail.com (文先森)</managingEditor><webMaster>webbleen@gmail.com (文先森)</webMaster><copyright>© 2025 文先森</copyright><lastBuildDate>Mon, 27 Jan 2025 11:00:00 +0800</lastBuildDate><atom:link href="https://me.flaretion.com/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScript 最佳实践：提升代码质量的实用技巧</title><link>https://me.flaretion.com/docs/typescript-best-practices/</link><pubDate>Mon, 27 Jan 2025 11:00:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/docs/typescript-best-practices/</guid><description>&lt;h2 class="relative group">🎯 TypeScript 核心优势
+&lt;div id="-typescript-核心优势" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-typescript-%e6%a0%b8%e5%bf%83%e4%bc%98%e5%8a%bf" aria-label="锚点">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>TypeScript 作为 JavaScript 的超集，通过静态类型检查帮助我们在开发阶段发现潜在问题，提升代码质量和开发体验。&lt;/p></description></item></channel></rss>

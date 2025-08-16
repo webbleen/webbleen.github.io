@@ -9,4 +9,98 @@ class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 
 &lt;p>Visit the &lt;a
 href="https://me.flaretion.com"
 target="_blank"
->Webbleen&lt;/a> website!&lt;/p></description></item><item><title/><link>https://me.flaretion.com/ja/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/ja/about/</guid><description>&lt;p>私について&lt;/p></description></item></channel></rss>
+>Webbleen&lt;/a> website!&lt;/p></description></item><item><title>私について</title><link>https://me.flaretion.com/ja/about/</link><pubDate>Mon, 27 Jan 2025 14:00:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/ja/about/</guid><description>&lt;h2 class="relative group">👋 こんにちは、私は文先森です
+&lt;div id="-こんにちは私は文先森です" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e3%81%93%e3%82%93%e3%81%ab%e3%81%a1%e3%81%af%e7%a7%81%e3%81%af%e6%96%87%e5%85%88%e6%a3%ae%e3%81%a7%e3%81%99" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>技術を愛するフルスタック開発エンジニアで、Web開発、モバイルアプリ、クラウドサービスに特化しています。技術革新を通じて実際の問題を解決し、技術経験を積極的に共有することに取り組んでいます。&lt;/p>
+&lt;h3 class="relative group">🎯 私の使命
+&lt;div id="-私の使命" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e7%a7%81%e3%81%ae%e4%bd%bf%e5%91%bd" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;blockquote>
+&lt;p>&amp;ldquo;コードで素晴らしい世界を構築し、技術を人類に奉仕させる&amp;rdquo;&lt;/p>&lt;/blockquote>
+&lt;p>技術の力が世界を変えることができると信じており、コードの最適化のたびに何百万ものユーザーの使用体験に影響を与える可能性があります。高品質、高性能、ユーザーフレンドリーなアプリケーションの作成に専念しています。&lt;/p>
+&lt;h2 class="relative group">🚀 技術専門分野
+&lt;div id="-技術専門分野" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e6%8a%80%e8%a1%93%e5%b0%82%e9%96%80%e5%88%86%e9%87%8e" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;h3 class="relative group">フロントエンド開発
+&lt;div id="フロントエンド開発" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e3%83%95%e3%83%ad%e3%83%b3%e3%83%88%e3%82%a8%e3%83%b3%e3%83%89%e9%96%8b%e7%99%ba" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>フレームワーク&lt;/strong>: React, Vue.js, Angular&lt;/li>
+&lt;li>&lt;strong>言語&lt;/strong>: JavaScript (ES6+), TypeScript, HTML5, CSS3&lt;/li>
+&lt;li>&lt;strong>ツール&lt;/strong>: Webpack, Vite, Babel, ESLint, Prettier&lt;/li>
+&lt;li>&lt;strong>スタイル&lt;/strong>: Sass/SCSS, Tailwind CSS, Styled Components&lt;/li>
+&lt;li>&lt;strong>状態管理&lt;/strong>: Redux, Zustand, Vuex, Pinia&lt;/li>
+&lt;/ul>
+&lt;h3 class="relative group">バックエンド開発
+&lt;div id="バックエンド開発" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89%e9%96%8b%e7%99%ba" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>言語&lt;/strong>: Node.js, Python, Go, Java&lt;/li>
+&lt;li>&lt;strong>フレームワーク&lt;/strong>: Express.js, FastAPI, Gin, Spring Boot&lt;/li>
+&lt;li>&lt;strong>データベース&lt;/strong>: PostgreSQL, MongoDB, Redis, MySQL&lt;/li>
+&lt;li>&lt;strong>API&lt;/strong>: RESTful API, GraphQL, gRPC&lt;/li>
+&lt;li>&lt;strong>マイクロサービス&lt;/strong>: Docker, Kubernetes, Istio&lt;/li>
+&lt;/ul>
+&lt;h3 class="relative group">モバイル開発
+&lt;div id="モバイル開発" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e3%83%a2%e3%83%90%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>クロスプラットフォーム&lt;/strong>: React Native, Flutter&lt;/li>
+&lt;li>&lt;strong>ネイティブ開発&lt;/strong>: iOS (Swift), Android (Kotlin)&lt;/li>
+&lt;li>&lt;strong>状態管理&lt;/strong>: Redux, MobX, Provider&lt;/li>
+&lt;li>&lt;strong>パフォーマンス最適化&lt;/strong>: メモリ管理, レンダリング最適化, ネットワーク最適化&lt;/li>
+&lt;/ul>
+&lt;h3 class="relative group">DevOps &amp;amp; クラウドサービス
+&lt;div id="devops--クラウドサービス" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#devops--%e3%82%af%e3%83%a9%e3%82%a6%e3%83%89%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>コンテナ化&lt;/strong>: Docker, Kubernetes, Helm&lt;/li>
+&lt;li>&lt;strong>CI/CD&lt;/strong>: GitHub Actions, GitLab CI, Jenkins&lt;/li>
+&lt;li>&lt;strong>クラウドプラットフォーム&lt;/strong>: AWS, Google Cloud, Azure, アリババクラウド&lt;/li>
+&lt;li>&lt;strong>モニタリング&lt;/strong>: Prometheus, Grafana, ELK Stack&lt;/li>
+&lt;li>&lt;strong>セキュリティ&lt;/strong>: OAuth 2.0, JWT, HTTPS, データ暗号化&lt;/li>
+&lt;/ul>
+&lt;h2 class="relative group">💼 職歴
+&lt;div id="-職歴" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e8%81%b7%e6%ad%b4" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;h3 class="relative group">シニアフルスタック開発エンジニア (2023 - 現在)
+&lt;div id="シニアフルスタック開発エンジニア-2023---現在" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e3%82%b7%e3%83%8b%e3%82%a2%e3%83%95%e3%83%ab%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e9%96%8b%e7%99%ba%e3%82%a8%e3%83%b3%e3%82%b8%e3%83%8b%e3%82%a2-2023---%e7%8f%be%e5%9c%a8" aria-label="アンカー">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;p>&lt;strong>某有名インターネット企業&lt;/strong>&lt;/p></description></item></channel></rss>
