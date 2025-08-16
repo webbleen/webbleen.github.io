@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冰灵志</title><link>https://me.flaretion.com/</link><description>Recent content on 冰灵志</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>webbleen@gmail.com (文先森)</managingEditor><webMaster>webbleen@gmail.com (文先森)</webMaster><copyright>© 2025 文先森</copyright><lastBuildDate>Mon, 27 Jan 2025 14:30:00 +0800</lastBuildDate><atom:link href="https://me.flaretion.com/index.xml" rel="self" type="application/rss+xml"/><item><title>关于我</title><link>https://me.flaretion.com/about/</link><pubDate>Mon, 27 Jan 2025 14:00:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/about/</guid><description>&lt;h2 class="relative group">👋 你好，我是文先森
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文先森的技术世界 on 冰灵志</title><link>https://me.flaretion.com/</link><description>Recent content in 文先森的技术世界 on 冰灵志</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>webbleen@gmail.com (文先森)</managingEditor><webMaster>webbleen@gmail.com (文先森)</webMaster><copyright>© 2025 文先森</copyright><lastBuildDate>Mon, 27 Jan 2025 15:30:00 +0800</lastBuildDate><atom:link href="https://me.flaretion.com/index.xml" rel="self" type="application/rss+xml"/><item><title>关于我</title><link>https://me.flaretion.com/about/</link><pubDate>Mon, 27 Jan 2025 14:00:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/about/</guid><description>&lt;h2 class="relative group">👋 你好，我是文先森
 &lt;div id="-你好我是文先森" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
@@ -6,11 +6,29 @@ class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 
 &lt;/span>
 &lt;/h2>
 &lt;p>一名热爱技术的全栈开发工程师，专注于 Web 开发、移动应用和云服务。我致力于通过技术创新解决实际问题，并积极分享技术经验。&lt;/p>
-&lt;h3 class="relative group">🎯 我的使命
+&lt;div class="ad-container ad-content-inline">
+&lt;ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-3668315850009617"
+data-ad-slot="5566778899"
+data-ad-format="auto"
+data-full-width-responsive="true">&lt;/ins>
+&lt;script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script>
+&lt;/div>
+&lt;h2 class="relative group">🎯 我的使命
 &lt;div id="-我的使命" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e6%88%91%e7%9a%84%e4%bd%bf%e5%91%bd" aria-label="锚点">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;h3 class="relative group">🎯 我的使命
+&lt;div id="-我的使命-1" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e6%88%91%e7%9a%84%e4%bd%bf%e5%91%bd-1" aria-label="锚点">#&lt;/a>
 &lt;/span>
 &lt;/h3>
 &lt;blockquote>
