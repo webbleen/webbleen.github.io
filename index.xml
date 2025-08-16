@@ -6,17 +6,6 @@ class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 
 &lt;/span>
 &lt;/h2>
 &lt;p>一名热爱技术的全栈开发工程师，专注于 Web 开发、移动应用和云服务。我致力于通过技术创新解决实际问题，并积极分享技术经验。&lt;/p>
-&lt;div class="ad-container ad-content-inline">
-&lt;ins class="adsbygoogle"
-style="display:block"
-data-ad-client="ca-pub-3668315850009617"
-data-ad-slot="5566778899"
-data-ad-format="auto"
-data-full-width-responsive="true">&lt;/ins>
-&lt;script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-&lt;/script>
-&lt;/div>
 &lt;h2 class="relative group">🎯 我的使命
 &lt;div id="-我的使命" class="anchor">&lt;/div>
 &lt;span
