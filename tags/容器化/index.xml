@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>容器化 on 冰灵志</title><link>https://me.flaretion.com/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/</link><description>Recent content in 容器化 on 冰灵志</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>webbleen@gmail.com (文先森)</managingEditor><webMaster>webbleen@gmail.com (文先森)</webMaster><copyright>© 2025 文先森</copyright><lastBuildDate>Mon, 27 Jan 2025 13:30:00 +0800</lastBuildDate><atom:link href="https://me.flaretion.com/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>云原生架构设计：构建可扩展的现代化应用</title><link>https://me.flaretion.com/docs/cloud-native-architecture/</link><pubDate>Mon, 27 Jan 2025 13:30:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/docs/cloud-native-architecture/</guid><description>&lt;h2 class="relative group">☁️ 云原生架构革命
-&lt;div id="-云原生架构革命" class="anchor">&lt;/div>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>容器化 on 文先森</title><link>https://webbleen.com/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/</link><description>Recent content in 容器化 on 文先森</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>webbleen@gmail.com (文先森)</managingEditor><webMaster>webbleen@gmail.com (文先森)</webMaster><copyright>© 2016 - 2025 京ICP备18050529号-1</copyright><lastBuildDate>Mon, 27 Jan 2025 13:30:00 +0800</lastBuildDate><atom:link href="https://webbleen.com/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>云原生架构设计：构建可扩展的现代化应用</title><link>https://webbleen.com/docs/cloud-native-architecture/</link><pubDate>Mon, 27 Jan 2025 13:30:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://webbleen.com/docs/cloud-native-architecture/</guid><description>&lt;h2 class="relative group"&gt;☁️ 云原生架构革命
+&lt;div id="-云原生架构革命" class="anchor"&gt;&lt;/div&gt;
 &lt;span
-class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e4%ba%91%e5%8e%9f%e7%94%9f%e6%9e%b6%e6%9e%84%e9%9d%a9%e5%91%bd" aria-label="锚点">#&lt;/a>
-&lt;/span>
-&lt;/h2>
-&lt;p>云原生架构代表了软件开发的未来方向，它不仅仅是技术的演进，更是开发思维和架构理念的根本转变。&lt;/p></description></item><item><title>Docker 容器化完全指南：从入门到生产部署</title><link>https://me.flaretion.com/docs/docker-containerization-guide/</link><pubDate>Mon, 27 Jan 2025 12:00:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://me.flaretion.com/docs/docker-containerization-guide/</guid><description>&lt;h2 class="relative group">🐳 Docker 容器化革命
-&lt;div id="-docker-容器化革命" class="anchor">&lt;/div>
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-%e4%ba%91%e5%8e%9f%e7%94%9f%e6%9e%b6%e6%9e%84%e9%9d%a9%e5%91%bd" aria-label="锚点"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;云原生架构代表了软件开发的未来方向，它不仅仅是技术的演进，更是开发思维和架构理念的根本转变。&lt;/p&gt;</description></item><item><title>Docker 容器化完全指南：从入门到生产部署</title><link>https://webbleen.com/docs/docker-containerization-guide/</link><pubDate>Mon, 27 Jan 2025 12:00:00 +0800</pubDate><author>webbleen@gmail.com (文先森)</author><guid>https://webbleen.com/docs/docker-containerization-guide/</guid><description>&lt;h2 class="relative group"&gt;🐳 Docker 容器化革命
+&lt;div id="-docker-容器化革命" class="anchor"&gt;&lt;/div&gt;
 &lt;span
-class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-docker-%e5%ae%b9%e5%99%a8%e5%8c%96%e9%9d%a9%e5%91%bd" aria-label="锚点">#&lt;/a>
-&lt;/span>
-&lt;/h2>
-&lt;p>Docker 作为容器化技术的代表，彻底改变了软件开发和部署的方式，实现了&amp;quot;一次构建，到处运行&amp;quot;的梦想。&lt;/p></description></item></channel></rss>
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-docker-%e5%ae%b9%e5%99%a8%e5%8c%96%e9%9d%a9%e5%91%bd" aria-label="锚点"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;Docker 作为容器化技术的代表，彻底改变了软件开发和部署的方式，实现了&amp;quot;一次构建，到处运行&amp;quot;的梦想。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# 允许所有页面被爬取
+Allow: /zh-cn/
+Allow: /ja/
+Allow: /docs/
+Allow: /about/
+
+# 允许标签和分类页面
+Allow: /tags/
+Allow: /categories/
+
+# 禁止爬取分页页面（这些会被主题自动处理）
+Disallow: */page/
+
+# 禁止爬取管理页面
+Disallow: /admin/
+Disallow: /private/
+
+# 站点地图
+Sitemap: https://tion.work/sitemap.xml
