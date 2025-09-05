@@ -19,4 +19,4 @@ Disallow: /admin/
 Disallow: /private/
 
 # 站点地图
-Sitemap: https://tion.work/sitemap.xml
+Sitemap: https://webbleen.com/sitemap.xml
