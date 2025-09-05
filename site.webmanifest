@@ -1,7 +1,7 @@
 {
-  "name": "Webbleen - 技术博客",
-  "short_name": "Webbleen",
-  "description": "Webbleen 技术博客，分享前端开发、后端开发、DevOps 等技术内容",
+  "name": "webbleen - 技术博客",
+  "short_name": "webbleen",
+  "description": "webbleen 技术博客，分享前端开发、后端开发、DevOps 等技术内容",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
