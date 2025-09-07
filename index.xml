@@ -103,12 +103,12 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h3&gt;
 &lt;/div&gt;
 &lt;h4 class="mt-0"&gt;
-高级开发工程师
+高级软件开发工程师
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
 &lt;ul&gt;
-&lt;li&gt;银行移动App开发&lt;/li&gt;
-&lt;li&gt;信用金库业务&lt;/li&gt;
+&lt;li&gt;银行移动App全栈开发，使用React Native和Node.js&lt;/li&gt;
+&lt;li&gt;信用金库核心业务系统维护和功能扩展&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -138,9 +138,9 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
 &lt;ul&gt;
-&lt;li&gt;金融贷款系统升级&lt;/li&gt;
-&lt;li&gt;航空移动App开发&lt;/li&gt;
-&lt;li&gt;流动性风险管理（Basel III）&lt;/li&gt;
+&lt;li&gt;金融贷款系统架构重构，提升系统性能和稳定性&lt;/li&gt;
+&lt;li&gt;航空移动App跨平台开发，支持iOS和Android&lt;/li&gt;
+&lt;li&gt;流动性风险管理模块开发，实现Basel III合规要求&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -170,8 +170,9 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
 &lt;ul&gt;
-&lt;li&gt;服务器架构设计和优化&lt;/li&gt;
-&lt;li&gt;游戏前端和后端开发&lt;/li&gt;
+&lt;li&gt;大型多人在线游戏服务器架构设计，支持10万+并发用户&lt;/li&gt;
+&lt;li&gt;Unity3D游戏客户端开发，实现复杂游戏逻辑和UI系统&lt;/li&gt;
+&lt;li&gt;游戏后端API开发，使用C#和MySQL构建稳定服务&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -197,13 +198,14 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h3&gt;
 &lt;/div&gt;
 &lt;h4 class="mt-0"&gt;
-lua游戏脚本工程师
+游戏开发工程师
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
-实习+转正
+实习 + 转正
 &lt;ul&gt;
-&lt;li&gt;游戏关卡任务制作&lt;/li&gt;
-&lt;li&gt;运营统计工具开发&lt;/li&gt;
+&lt;li&gt;使用Lua脚本开发游戏关卡和任务系统，提升游戏可玩性&lt;/li&gt;
+&lt;li&gt;开发运营数据统计工具，使用PHP和MySQL分析用户行为&lt;/li&gt;
+&lt;li&gt;参与游戏平衡性调整，优化玩家体验和留存率&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;

@@ -92,7 +92,7 @@ class="bg-primary-500 dark:bg-primary-300 text-neutral-50 dark:text-neutral-700 
 &lt;/div&gt;
 &lt;div class="block p-6 rounded-lg shadow-2xl min-w-full ml-6 mb-10 break-words"&gt;
 &lt;div class="flex justify-between"&gt;
-&lt;h2 class="mt-0"&gt;東軟日本&lt;/h2&gt;
+&lt;h2 class="mt-0"&gt;Neusoft Japan（株）&lt;/h2&gt;
 &lt;h3 class=""&gt;
 &lt;span class="flex cursor-pointer"&gt;
 &lt;span
@@ -103,12 +103,12 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h3&gt;
 &lt;/div&gt;
 &lt;h4 class="mt-0"&gt;
-シニア開発エンジニア
+シニアソフトウェア開発エンジニア
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
 &lt;ul&gt;
-&lt;li&gt;銀行モバイルアプリ開発&lt;/li&gt;
-&lt;li&gt;信用金庫業務&lt;/li&gt;
+&lt;li&gt;銀行モバイルアプリのフルスタック開発、React NativeとNode.jsを使用&lt;/li&gt;
+&lt;li&gt;信用金庫コア業務システムの保守と機能拡張&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -138,9 +138,9 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
 &lt;ul&gt;
-&lt;li&gt;金融ローンシステムアップグレード&lt;/li&gt;
-&lt;li&gt;航空モバイルアプリ開発&lt;/li&gt;
-&lt;li&gt;流動性リスク管理（Basel III）&lt;/li&gt;
+&lt;li&gt;金融ローンシステムのアーキテクチャ再構築、システム性能と安定性を向上&lt;/li&gt;
+&lt;li&gt;航空モバイルアプリのクロスプラットフォーム開発、iOSとAndroidをサポート&lt;/li&gt;
+&lt;li&gt;流動性リスク管理モジュールの開発、Basel IIIコンプライアンス要件を実現&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -155,7 +155,7 @@ class="bg-primary-500 dark:bg-primary-300 text-neutral-50 dark:text-neutral-700 
 &lt;/div&gt;
 &lt;div class="block p-6 rounded-lg shadow-2xl min-w-full ml-6 mb-10 break-words"&gt;
 &lt;div class="flex justify-between"&gt;
-&lt;h2 class="mt-0"&gt;藍港インタラクティブグループ&lt;/h2&gt;
+&lt;h2 class="mt-0"&gt;藍港互動集團&lt;/h2&gt;
 &lt;h3 class=""&gt;
 &lt;span class="flex cursor-pointer"&gt;
 &lt;span
@@ -170,8 +170,9 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
 &lt;ul&gt;
-&lt;li&gt;サーバーアーキテクチャ設計と最適化&lt;/li&gt;
-&lt;li&gt;ゲームフロントエンドとバックエンド開発&lt;/li&gt;
+&lt;li&gt;大型マルチプレイヤーオンラインゲームのサーバーアーキテクチャ設計、10万+同時接続ユーザーをサポート&lt;/li&gt;
+&lt;li&gt;Unity3Dゲームクライアント開発、複雑なゲームロジックとUIシステムを実現&lt;/li&gt;
+&lt;li&gt;ゲームバックエンドAPI開発、C#とMySQLを使用して安定したサービスを構築&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -186,7 +187,7 @@ class="bg-primary-500 dark:bg-primary-300 text-neutral-50 dark:text-neutral-700 
 &lt;/div&gt;
 &lt;div class="block p-6 rounded-lg shadow-2xl min-w-full ml-6 mb-10 break-words"&gt;
 &lt;div class="flex justify-between"&gt;
-&lt;h2 class="mt-0"&gt;北京遠明山水ネットワーク科技有限公司&lt;/h2&gt;
+&lt;h2 class="mt-0"&gt;北京遠明山水網絡科技有限公司&lt;/h2&gt;
 &lt;h3 class=""&gt;
 &lt;span class="flex cursor-pointer"&gt;
 &lt;span
@@ -197,13 +198,14 @@ class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal te
 &lt;/h3&gt;
 &lt;/div&gt;
 &lt;h4 class="mt-0"&gt;
-luaゲームスクリプトエンジニア
+ゲーム開発エンジニア
 &lt;/h4&gt;
 &lt;div class="mb-6"&gt;
-インターン+正社員
+インターン + 正社員
 &lt;ul&gt;
-&lt;li&gt;ゲームステージタスク制作&lt;/li&gt;
-&lt;li&gt;運営統計ツール開発&lt;/li&gt;
+&lt;li&gt;Luaスクリプトを使用してゲームステージとタスクシステムを開発、ゲームのプレイアビリティを向上&lt;/li&gt;
+&lt;li&gt;運営データ統計ツールの開発、PHPとMySQLを使用してユーザー行動を分析&lt;/li&gt;
+&lt;li&gt;ゲームバランス調整に参加、プレイヤー体験とリテンション率を最適化&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
