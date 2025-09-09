@@ -1,0 +1,11 @@
+{
+  "baseUrl": "https://api.webbleen.com",
+  "endpoints": {
+    "visit": "/stats/visit",
+    "visits": "/stats/visits",
+    "pages": "/stats/pages",
+    "trend": "/stats/trend",
+    "behavior": "/stats/behavior",
+    "daily": "/stats/daily"
+  }
+}
