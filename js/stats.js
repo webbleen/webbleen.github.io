@@ -11,38 +11,25 @@
     
     // 加载配置
     async function loadConfig() {
-        try {
-            const response = await fetch('/config/api.json');
-            const apiConfig = await response.json();
-            CONFIG = {
-                api: apiConfig,
-                session: {
-                    key: 'webbleen_session_id',
-                    visitKey: 'webbleen_visit_recorded'
+        // 直接使用默认配置，避免网络请求失败
+        CONFIG = {
+            api: {
+                baseUrl: 'https://api.webbleen.com',
+                endpoints: {
+                    visit: '/stats/visit',
+                    visits: '/stats/visits',
+                    pages: '/stats/pages',
+                    trend: '/stats/trend',
+                    behavior: '/stats/behavior',
+                    daily: '/stats/daily'
                 }
-            };
-        } catch (error) {
-            console.error('Failed to load API config:', error);
-            // 使用默认配置
-            CONFIG = {
-                api: {
-                    baseUrl: 'https://api.webbleen.com',
-                    endpoints: {
-                        visit: '/stats/visit',
-                        visits: '/stats/visits',
-                        content: '/stats/content',
-                        pages: '/stats/pages',
-                        trend: '/stats/trend',
-                        behavior: '/stats/behavior',
-                        daily: '/stats/daily'
-                    }
-                },
-                session: {
-                    key: 'webbleen_session_id',
-                    visitKey: 'webbleen_visit_recorded'
-                }
-            };
-        }
+            },
+            session: {
+                key: 'webbleen_session_id',
+                visitKey: 'webbleen_visit_recorded'
+            }
+        };
+        console.log('Config loaded:', CONFIG);
     }
     
     // 获取或生成会话ID
@@ -92,13 +79,61 @@
         return 'Unknown';
     }
     
-    // 获取地理位置信息（简化版）
-    function getLocation() {
-        // 这里可以集成第三方地理位置API
-        return {
-            country: 'Unknown',
-            city: 'Unknown'
-        };
+    // 获取地理位置信息（通过IP API，带缓存）
+    async function getLocation() {
+        const CACHE_KEY = 'webbleen_location_cache';
+        const CACHE_DURATION = 30 * 60 * 1000; // 30分钟缓存
+        
+        // 检查缓存
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            try {
+                const cacheData = JSON.parse(cached);
+                const now = Date.now();
+                
+                // 检查缓存是否过期
+                if (now - cacheData.timestamp < CACHE_DURATION) {
+                    console.log('Using cached location data');
+                    return cacheData.location;
+                } else {
+                    console.log('Location cache expired, fetching new data');
+                    localStorage.removeItem(CACHE_KEY);
+                }
+            } catch (error) {
+                console.warn('Failed to parse cached location data:', error);
+                localStorage.removeItem(CACHE_KEY);
+            }
+        }
+        
+        try {
+            console.log('Fetching location data from ipapi.co');
+            // 使用免费的IP地理位置API
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            
+            const location = {
+                country: data.country_name || 'Unknown',
+                city: data.city || 'Unknown',
+                ip: data.ip || 'Unknown'
+            };
+            
+            // 缓存数据
+            const cacheData = {
+                timestamp: Date.now(),
+                location: location
+            };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+            console.log('Location data cached for 30 minutes');
+            
+            return location;
+        } catch (error) {
+            console.warn('Failed to get location info:', error);
+            return {
+                country: 'Unknown',
+                city: 'Unknown',
+                ip: 'Unknown'
+            };
+        }
     }
     
     // 获取当前页面语言
@@ -108,12 +143,17 @@
             return 'ja';
         } else if (path.startsWith('/zh-cn/')) {
             return 'zh-cn';
+        } else if (path.startsWith('/en/')) {
+            return 'en';
         }
-        return 'en';
+        // 默认语言为中文
+        return 'zh-cn';
     }
     
     // 记录访问
-    function recordVisit() {
+    async function recordVisit() {
+        console.log('recordVisit called');
+        
         // 检查配置是否已加载
         if (!CONFIG || !CONFIG.session || !CONFIG.api) {
             console.log('Config not ready, skipping visit record');
@@ -123,11 +163,17 @@
         // 检查是否已经记录过本次访问
         const visitKey = CONFIG.session.visitKey + '_' + window.location.pathname;
         if (sessionStorage.getItem(visitKey)) {
+            console.log('Visit already recorded for this page');
             return;
         }
         
         // 获取当前页面语言
         const language = getCurrentLanguage();
+        console.log('Detected language:', language);
+        
+        // 异步获取地理位置信息
+        const location = await getLocation();
+        console.log('Location info:', location);
         
         const visitData = {
             page: window.location.pathname,
@@ -135,27 +181,35 @@
             device: getDeviceType(),
             browser: getBrowser(),
             os: getOS(),
-            country: getLocation().country,
-            city: getLocation().city,
+            country: location.country,
+            city: location.city,
+            ip: location.ip,
             language: language
         };
         
+        console.log('Sending visit data:', visitData);
+        
         // 发送统计数据
-        fetch(CONFIG.api.baseUrl + CONFIG.api.endpoints.visit, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(visitData)
-        }).then(response => {
+        try {
+            const response = await fetch(CONFIG.api.baseUrl + CONFIG.api.endpoints.visit, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(visitData)
+            });
+            
+            console.log('API response status:', response.status);
             if (response.ok) {
                 // 标记已记录
                 sessionStorage.setItem(visitKey, 'true');
                 console.log('Visit recorded successfully');
+            } else {
+                console.error('Failed to record visit:', response.status, response.statusText);
             }
-        }).catch(error => {
+        } catch (error) {
             console.error('Error recording visit:', error);
-        });
+        }
     }
     
     // 获取统计数据
