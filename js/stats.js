@@ -114,7 +114,7 @@
             const location = {
                 country: data.country_name || 'Unknown',
                 city: data.city || 'Unknown',
-                ip: data.ip || 'Unknown'
+                ip: data.ip || ''  // 如果API失败，传递空字符串而不是'Unknown'
             };
             
             // 缓存数据
@@ -131,7 +131,7 @@
             return {
                 country: 'Unknown',
                 city: 'Unknown',
-                ip: 'Unknown'
+                ip: ''  // 如果API失败，传递空字符串而不是'Unknown'
             };
         }
     }
