@@ -111,6 +111,16 @@
             const response = await fetch('https://ipapi.co/json/');
             const data = await response.json();
             
+            // 检查API是否返回错误
+            if (data.error) {
+                console.warn('ipapi.co API error:', data.reason, data.message);
+                return {
+                    country: 'Unknown',
+                    city: 'Unknown',
+                    ip: ''  // 传递空字符串，让后端使用其他方式获取IP
+                };
+            }
+            
             const location = {
                 country: data.country_name || 'Unknown',
                 city: data.city || 'Unknown',
@@ -127,12 +137,27 @@
             
             return location;
         } catch (error) {
-            console.warn('Failed to get location info:', error);
-            return {
-                country: 'Unknown',
-                city: 'Unknown',
-                ip: ''  // 如果API失败，传递空字符串而不是'Unknown'
-            };
+            console.warn('Failed to get location info from ipapi.co:', error);
+            
+            // 尝试备用API
+            try {
+                console.log('Trying backup IP API...');
+                const backupResponse = await fetch('https://ipinfo.io/json');
+                const backupData = await backupResponse.json();
+                
+                return {
+                    country: backupData.country || 'Unknown',
+                    city: backupData.city || 'Unknown',
+                    ip: backupData.ip || ''
+                };
+            } catch (backupError) {
+                console.warn('Backup IP API also failed:', backupError);
+                return {
+                    country: 'Unknown',
+                    city: 'Unknown',
+                    ip: ''  // 如果API失败，传递空字符串而不是'Unknown'
+                };
+            }
         }
     }
     
@@ -152,7 +177,7 @@
     
     // 记录访问
     async function recordVisit() {
-        console.log('recordVisit called');
+        console.log('recordVisit called for path:', window.location.pathname);
         
         // 检查配置是否已加载
         if (!CONFIG || !CONFIG.session || !CONFIG.api) {
@@ -162,8 +187,11 @@
         
         // 检查是否已经记录过本次访问
         const visitKey = CONFIG.session.visitKey + '_' + window.location.pathname;
+        console.log('Checking visitKey:', visitKey);
+        console.log('sessionStorage value:', sessionStorage.getItem(visitKey));
+        
         if (sessionStorage.getItem(visitKey)) {
-            console.log('Visit already recorded for this page');
+            console.log('Visit already recorded for this page, skipping');
             return;
         }
         
@@ -203,7 +231,8 @@
             if (response.ok) {
                 // 标记已记录
                 sessionStorage.setItem(visitKey, 'true');
-                console.log('Visit recorded successfully');
+                console.log('Visit recorded successfully, visitKey set:', visitKey);
+                console.log('sessionStorage now contains:', sessionStorage.getItem(visitKey));
             } else {
                 console.error('Failed to record visit:', response.status, response.statusText);
             }
