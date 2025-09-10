@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Containerization on webbleen</title><link>https://webbleen.com/en/tags/containerization/</link><description>Recent content in Containerization on webbleen</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>webbleen@gmail.com (webbleen)</managingEditor><webMaster>webbleen@gmail.com (webbleen)</webMaster><copyright>© 2018 - 2025 webbleen.</copyright><lastBuildDate>Thu, 22 Feb 2024 18:47:57 +0800</lastBuildDate><atom:link href="https://webbleen.com/en/tags/containerization/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker Containerization Guide: From Basics to Production</title><link>https://webbleen.com/en/docs/docker-containerization-guide/</link><pubDate>Thu, 22 Feb 2024 18:47:57 +0800</pubDate><author>webbleen@gmail.com (webbleen)</author><guid>https://webbleen.com/en/docs/docker-containerization-guide/</guid><description>&lt;h2 class="relative group"&gt;🐳 What is Docker?
+&lt;div id="-what-is-docker" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-what-is-docker" aria-label="Anchor"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;Docker is a containerization platform that allows you to package applications and their dependencies into lightweight, portable containers. It solves the &amp;ldquo;it works on my machine&amp;rdquo; problem by ensuring consistency across different environments.&lt;/p&gt;</description></item></channel></rss>

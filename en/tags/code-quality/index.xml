@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code Quality on webbleen</title><link>https://webbleen.com/en/tags/code-quality/</link><description>Recent content in Code Quality on webbleen</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>webbleen@gmail.com (webbleen)</managingEditor><webMaster>webbleen@gmail.com (webbleen)</webMaster><copyright>© 2018 - 2025 webbleen.</copyright><lastBuildDate>Wed, 25 Dec 2024 16:26:14 +0800</lastBuildDate><atom:link href="https://webbleen.com/en/tags/code-quality/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScript Best Practices: Writing Maintainable Code</title><link>https://webbleen.com/en/docs/typescript-best-practices/</link><pubDate>Wed, 25 Dec 2024 16:26:14 +0800</pubDate><author>webbleen@gmail.com (webbleen)</author><guid>https://webbleen.com/en/docs/typescript-best-practices/</guid><description>&lt;h2 class="relative group"&gt;🎯 Why TypeScript?
+&lt;div id="-why-typescript" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-why-typescript" aria-label="Anchor"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;TypeScript is a strongly typed superset of JavaScript that compiles to plain JavaScript. It provides static type checking, better IDE support, and helps catch errors at compile time rather than runtime.&lt;/p&gt;</description></item></channel></rss>

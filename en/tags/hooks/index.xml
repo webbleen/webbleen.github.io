@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hooks on webbleen</title><link>https://webbleen.com/en/tags/hooks/</link><description>Recent content in Hooks on webbleen</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>webbleen@gmail.com (webbleen)</managingEditor><webMaster>webbleen@gmail.com (webbleen)</webMaster><copyright>© 2018 - 2025 webbleen.</copyright><lastBuildDate>Mon, 14 Oct 2024 11:45:41 +0800</lastBuildDate><atom:link href="https://webbleen.com/en/tags/hooks/index.xml" rel="self" type="application/rss+xml"/><item><title>React Hooks Complete Guide: From Beginner to Expert</title><link>https://webbleen.com/en/docs/react-hooks-complete-guide/</link><pubDate>Mon, 14 Oct 2024 11:45:41 +0800</pubDate><author>webbleen@gmail.com (webbleen)</author><guid>https://webbleen.com/en/docs/react-hooks-complete-guide/</guid><description>&lt;h2 class="relative group"&gt;🎯 What are React Hooks?
+&lt;div id="-what-are-react-hooks" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#-what-are-react-hooks" aria-label="Anchor"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;React Hooks are functions that let you use state and other React features in functional components. Introduced in React 16.8, they revolutionized how we write React applications by eliminating the need for class components.&lt;/p&gt;</description></item></channel></rss>
