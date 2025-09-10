@@ -185,15 +185,7 @@
             return;
         }
         
-        // 检查是否已经记录过本次访问
-        const visitKey = CONFIG.session.visitKey + '_' + window.location.pathname;
-        console.log('Checking visitKey:', visitKey);
-        console.log('sessionStorage value:', sessionStorage.getItem(visitKey));
-        
-        if (sessionStorage.getItem(visitKey)) {
-            console.log('Visit already recorded for this page, skipping');
-            return;
-        }
+        // 去重逻辑已移至后端API，前端不再需要检查
         
         // 获取当前页面语言
         const language = getCurrentLanguage();
@@ -229,10 +221,12 @@
             
             console.log('API response status:', response.status);
             if (response.ok) {
-                // 标记已记录
-                sessionStorage.setItem(visitKey, 'true');
-                console.log('Visit recorded successfully, visitKey set:', visitKey);
-                console.log('sessionStorage now contains:', sessionStorage.getItem(visitKey));
+                const data = await response.json();
+                if (data.data && data.data.recorded) {
+                    console.log('Visit recorded successfully:', data.data.reason);
+                } else {
+                    console.log('Visit already recorded today:', data.data.reason);
+                }
             } else {
                 console.error('Failed to record visit:', response.status, response.statusText);
             }
