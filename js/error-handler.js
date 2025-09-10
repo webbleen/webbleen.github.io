@@ -4,12 +4,18 @@
     
     // 捕获未处理的Promise拒绝
     window.addEventListener('unhandledrejection', function(event) {
-        // 过滤掉AdSense相关的错误，这些通常是无害的
+        // 过滤掉AdSense和Chrome扩展相关的错误，这些通常是无害的
         if (event.reason && typeof event.reason === 'string') {
             if (event.reason.includes('runtime.lastError') || 
                 event.reason.includes('MessageNotSentError') ||
-                event.reason.includes('RegisterClientLocalizationsError')) {
-                // 静默处理AdSense相关错误
+                event.reason.includes('RegisterClientLocalizationsError') ||
+                event.reason.includes('message channel closed') ||
+                event.reason.includes('A listener indicated an asynchronous response') ||
+                event.reason.includes('adsbygoogle') ||
+                event.reason.includes('googlesyndication') ||
+                event.reason.includes('doubleclick') ||
+                event.reason.includes('googleadservices')) {
+                // 静默处理AdSense和Chrome扩展相关错误
                 event.preventDefault();
                 return;
             }
@@ -21,14 +27,20 @@
     
     // 捕获全局错误
     window.addEventListener('error', function(event) {
-        // 过滤掉AdSense相关的错误
+        // 过滤掉AdSense和Chrome扩展相关的错误
         if (event.message && (
             event.message.includes('runtime.lastError') ||
             event.message.includes('MessageNotSentError') ||
             event.message.includes('RegisterClientLocalizationsError') ||
-            event.message.includes('postMessage')
+            event.message.includes('postMessage') ||
+            event.message.includes('message channel closed') ||
+            event.message.includes('A listener indicated an asynchronous response') ||
+            event.message.includes('adsbygoogle') ||
+            event.message.includes('googlesyndication') ||
+            event.message.includes('doubleclick') ||
+            event.message.includes('googleadservices')
         )) {
-            // 静默处理AdSense相关错误
+            // 静默处理AdSense和Chrome扩展相关错误
             event.preventDefault();
             return;
         }
@@ -42,11 +54,17 @@
     console.error = function(...args) {
         const message = args.join(' ');
         
-        // 过滤掉AdSense相关的错误
+        // 过滤掉AdSense和Chrome扩展相关的错误
         if (message.includes('runtime.lastError') ||
             message.includes('MessageNotSentError') ||
             message.includes('RegisterClientLocalizationsError') ||
-            message.includes('postMessage')) {
+            message.includes('postMessage') ||
+            message.includes('message channel closed') ||
+            message.includes('A listener indicated an asynchronous response') ||
+            message.includes('adsbygoogle') ||
+            message.includes('googlesyndication') ||
+            message.includes('doubleclick') ||
+            message.includes('googleadservices')) {
             // 静默处理，不输出到控制台
             return;
         }
