@@ -1,22 +1,53 @@
 User-agent: *
 Allow: /
 
-# 允许所有页面被爬取
+# 多语言页面
 Allow: /zh-cn/
 Allow: /ja/
+Allow: /en/
+
+# 主要内容页面
 Allow: /docs/
 Allow: /about/
+Allow: /stats/
+Allow: /links/
+Allow: /milestone/
+Allow: /album/
 
-# 允许标签和分类页面
+# 标签和分类页面
 Allow: /tags/
 Allow: /categories/
 
 # 禁止爬取分页页面（这些会被主题自动处理）
 Disallow: */page/
 
-# 禁止爬取管理页面
+# 禁止爬取管理页面和临时文件
 Disallow: /admin/
 Disallow: /private/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /node_modules/
+Disallow: /resources/
+
+# 禁止爬取API和统计相关页面
+Disallow: /api/
+Disallow: /stats-data/
+
+# 允许特定爬虫访问更多内容
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
 
 # 站点地图
 Sitemap: https://webbleen.com/sitemap.xml
+Sitemap: https://webbleen.com/zh-cn/sitemap.xml
+Sitemap: https://webbleen.com/ja/sitemap.xml
+Sitemap: https://webbleen.com/en/sitemap.xml
