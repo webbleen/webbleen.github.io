@@ -6,6 +6,10 @@
     "pages": "/stats/pages",
     "trend": "/stats/trend",
     "behavior": "/stats/behavior",
-    "daily": "/stats/daily"
+    "daily": "/stats/daily",
+    "geo": "/proxy/geo",
+    "ip": "/proxy/ip",
+    "favicon": "/proxy/favicon",
+    "bing": "/proxy/bing"
   }
 }

@@ -11,25 +11,45 @@
     
     // 加载配置
     async function loadConfig() {
-        // 直接使用默认配置，避免网络请求失败
-        CONFIG = {
-            api: {
-                baseUrl: 'https://api.webbleen.com',
-                endpoints: {
-                    visit: '/stats/visit',
-                    visits: '/stats/visits',
-                    pages: '/stats/pages',
-                    trend: '/stats/trend',
-                    behavior: '/stats/behavior',
-                    daily: '/stats/daily'
+        try {
+            // 从JSON文件加载配置
+            const response = await fetch('/config/api.json');
+            const apiConfig = await response.json();
+            
+            CONFIG = {
+                api: apiConfig,
+                session: {
+                    key: 'webbleen_session_id',
+                    visitKey: 'webbleen_visit_recorded'
                 }
-            },
-            session: {
-                key: 'webbleen_session_id',
-                visitKey: 'webbleen_visit_recorded'
-            }
-        };
-        // console.log('Config loaded:', CONFIG);
+            };
+            // console.log('Config loaded from JSON:', CONFIG);
+        } catch (error) {
+            console.warn('Failed to load config from JSON, using fallback:', error);
+            // 如果JSON加载失败，使用默认配置
+            CONFIG = {
+                api: {
+                    baseUrl: 'https://api.webbleen.com',
+                    endpoints: {
+                        visit: '/stats/visit',
+                        visits: '/stats/visits',
+                        pages: '/stats/pages',
+                        trend: '/stats/trend',
+                        behavior: '/stats/behavior',
+                        daily: '/stats/daily',
+                        geo: '/proxy/geo',
+                        ip: '/proxy/ip',
+                        favicon: '/proxy/favicon',
+                        bing: '/proxy/bing'
+                    }
+                },
+                session: {
+                    key: 'webbleen_session_id',
+                    visitKey: 'webbleen_visit_recorded'
+                }
+            };
+            // console.log('Config loaded from fallback:', CONFIG);
+        }
     }
     
     // 获取或生成会话ID
@@ -106,14 +126,15 @@
         }
         
         try {
-            // console.log('Fetching location data from ipapi.co');
-            // 使用免费的IP地理位置API
-            const response = await fetch('https://ipapi.co/json/');
+            // console.log('Fetching location data from proxy API');
+            // 使用自己的代理API获取地理位置信息
+            const proxyUrl = CONFIG.api.baseUrl + CONFIG.api.endpoints.geo;
+            const response = await fetch(proxyUrl);
             const data = await response.json();
             
             // 检查API是否返回错误
-            if (data.error) {
-                console.warn('ipapi.co API error:', data.reason, data.message);
+            if (data.code !== 200) {
+                console.warn('Proxy API error:', data.msg);
                 return {
                     country: 'Unknown',
                     city: 'Unknown',
@@ -122,9 +143,9 @@
             }
             
             const location = {
-                country: data.country_name || 'Unknown',
-                city: data.city || 'Unknown',
-                ip: data.ip || ''  // 如果API失败，传递空字符串而不是'Unknown'
+                country: data.data.country || 'Unknown',
+                city: data.data.city || 'Unknown',
+                ip: data.data.ip || ''  // 如果API失败，传递空字符串而不是'Unknown'
             };
             
             // 缓存数据
@@ -137,27 +158,12 @@
             
             return location;
         } catch (error) {
-            console.warn('Failed to get location info from ipapi.co:', error);
-            
-            // 尝试备用API
-            try {
-                // console.log('Trying backup IP API...');
-                const backupResponse = await fetch('https://ipinfo.io/json');
-                const backupData = await backupResponse.json();
-                
-                return {
-                    country: backupData.country || 'Unknown',
-                    city: backupData.city || 'Unknown',
-                    ip: backupData.ip || ''
-                };
-            } catch (backupError) {
-                console.warn('Backup IP API also failed:', backupError);
-                return {
-                    country: 'Unknown',
-                    city: 'Unknown',
-                    ip: ''  // 如果API失败，传递空字符串而不是'Unknown'
-                };
-            }
+            console.warn('Failed to get location info from proxy API:', error);
+            return {
+                country: 'Unknown',
+                city: 'Unknown',
+                ip: ''  // 如果API失败，传递空字符串而不是'Unknown'
+            };
         }
     }
     
@@ -173,6 +179,57 @@
         }
         // 默认语言为中文
         return 'zh-cn';
+    }
+    
+    // 获取客户端IP地址
+    async function getClientIP() {
+        try {
+            const proxyUrl = CONFIG.api.baseUrl + CONFIG.api.endpoints.ip;
+            const response = await fetch(proxyUrl);
+            const data = await response.json();
+            
+            if (data.code === 200) {
+                return data.data.ip;
+            }
+            return '';
+        } catch (error) {
+            console.warn('Failed to get client IP:', error);
+            return '';
+        }
+    }
+    
+    // 获取网站图标
+    async function getFavicon(url) {
+        try {
+            const proxyUrl = CONFIG.api.baseUrl + CONFIG.api.endpoints.favicon;
+            const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(url)}`);
+            const data = await response.json();
+            
+            if (data.code === 200) {
+                return data.data.url;
+            }
+            return '';
+        } catch (error) {
+            console.warn('Failed to get favicon:', error);
+            return '';
+        }
+    }
+    
+    // 获取必应壁纸
+    async function getBingWallpaper() {
+        try {
+            const proxyUrl = CONFIG.api.baseUrl + CONFIG.api.endpoints.bing;
+            const response = await fetch(proxyUrl);
+            const data = await response.json();
+            
+            if (data.code === 200 && data.data.images && data.data.images.length > 0) {
+                return data.data.images[0];
+            }
+            return null;
+        } catch (error) {
+            console.warn('Failed to get Bing wallpaper:', error);
+            return null;
+        }
     }
     
     // 记录访问
@@ -344,6 +401,10 @@
         getContentStats: getContentStats,
         updateContentStats: updateContentStats,
         getSessionId: getSessionId,
+        getClientIP: getClientIP,
+        getFavicon: getFavicon,
+        getBingWallpaper: getBingWallpaper,
+        getLocation: getLocation,
         init: init
     };
     
