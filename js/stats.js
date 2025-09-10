@@ -29,7 +29,7 @@
                 visitKey: 'webbleen_visit_recorded'
             }
         };
-        console.log('Config loaded:', CONFIG);
+        // console.log('Config loaded:', CONFIG);
     }
     
     // 获取或生成会话ID
@@ -93,10 +93,10 @@
                 
                 // 检查缓存是否过期
                 if (now - cacheData.timestamp < CACHE_DURATION) {
-                    console.log('Using cached location data');
+                    // console.log('Using cached location data');
                     return cacheData.location;
                 } else {
-                    console.log('Location cache expired, fetching new data');
+                    // console.log('Location cache expired, fetching new data');
                     localStorage.removeItem(CACHE_KEY);
                 }
             } catch (error) {
@@ -106,7 +106,7 @@
         }
         
         try {
-            console.log('Fetching location data from ipapi.co');
+            // console.log('Fetching location data from ipapi.co');
             // 使用免费的IP地理位置API
             const response = await fetch('https://ipapi.co/json/');
             const data = await response.json();
@@ -133,7 +133,7 @@
                 location: location
             };
             localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-            console.log('Location data cached for 30 minutes');
+            // console.log('Location data cached for 30 minutes');
             
             return location;
         } catch (error) {
@@ -141,7 +141,7 @@
             
             // 尝试备用API
             try {
-                console.log('Trying backup IP API...');
+                // console.log('Trying backup IP API...');
                 const backupResponse = await fetch('https://ipinfo.io/json');
                 const backupData = await backupResponse.json();
                 
@@ -177,11 +177,11 @@
     
     // 记录访问
     async function recordVisit() {
-        console.log('recordVisit called for path:', window.location.pathname);
+        // console.log('recordVisit called for path:', window.location.pathname);
         
         // 检查配置是否已加载
         if (!CONFIG || !CONFIG.session || !CONFIG.api) {
-            console.log('Config not ready, skipping visit record');
+            // console.log('Config not ready, skipping visit record');
             return;
         }
         
@@ -189,11 +189,11 @@
         
         // 获取当前页面语言
         const language = getCurrentLanguage();
-        console.log('Detected language:', language);
+        // console.log('Detected language:', language);
         
         // 异步获取地理位置信息
         const location = await getLocation();
-        console.log('Location info:', location);
+        // console.log('Location info:', location);
         
         const visitData = {
             page: window.location.pathname,
@@ -207,7 +207,7 @@
             language: language
         };
         
-        console.log('Sending visit data:', visitData);
+        // console.log('Sending visit data:', visitData);
         
         // 发送统计数据
         try {
@@ -219,13 +219,13 @@
                 body: JSON.stringify(visitData)
             });
             
-            console.log('API response status:', response.status);
+            // console.log('API response status:', response.status);
             if (response.ok) {
                 const data = await response.json();
                 if (data.data && data.data.recorded) {
-                    console.log('Visit recorded successfully:', data.data.reason);
+                    // console.log('Visit recorded successfully:', data.data.reason);
                 } else {
-                    console.log('Visit already recorded today:', data.data.reason);
+                    // console.log('Visit already recorded today:', data.data.reason);
                 }
             } else {
                 console.error('Failed to record visit:', response.status, response.statusText);
@@ -296,7 +296,7 @@
         }).then(response => response.json())
         .then(data => {
             if (data.code === 200) {
-                console.log('Content stats updated successfully');
+                // console.log('Content stats updated successfully');
                 return data.data;
             }
             throw new Error(data.msg);

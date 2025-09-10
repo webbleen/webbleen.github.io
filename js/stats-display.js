@@ -24,20 +24,20 @@
     function loadStatsData() {
         // 获取当前页面语言
         const language = getCurrentLanguage();
-        console.log('Loading stats for language:', language);
+        // console.log('Loading stats for language:', language);
         
         // 构建 API URL
         const apiUrl = `https://api.webbleen.com/stats/visits?language=${language}`;
-        console.log('API URL:', apiUrl);
+        // console.log('API URL:', apiUrl);
         
         // 发送请求
         fetch(apiUrl)
             .then(response => {
-                console.log('API response status:', response.status);
+                // console.log('API response status:', response.status);
                 return response.json();
             })
             .then(data => {
-                console.log('Stats data received:', data);
+                // console.log('Stats data received:', data);
                 if (data.code === 200 && data.data) {
                     // 更新页面显示
                     updateStatsDisplay(data.data);
@@ -72,7 +72,7 @@
             uniqueVisitorsElement.textContent = data.unique_visitors_today || 0;
         }
         
-        console.log('Stats display updated successfully');
+        // console.log('Stats display updated successfully');
     }
     
     // 显示错误信息
@@ -90,7 +90,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // 检查是否在统计页面
         if (window.location.pathname.includes('/stats/')) {
-            console.log('Stats page detected, loading data...');
+            // console.log('Stats page detected, loading data...');
             loadStatsData();
         }
     });

@@ -74,5 +74,5 @@
         }
     }
     
-    console.log('Error handler initialized successfully');
+    // console.log('Error handler initialized successfully');
 })();
